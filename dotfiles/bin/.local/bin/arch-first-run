@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+FIRST_RUN_MODE=~/.local/state/archy/first-run.mode
+
+if [[ -f "$FIRST_RUN_MODE" ]]; then
+  rm -f "$FIRST_RUN_MODE"
+
+  bash "$HOME/archsetup/first-run/cleanup-reboot-sudoers.sh"
+  bash "$HOME/archsetup/first-run/firewall.sh"
+  bash "$HOME/archsetup/first-run/dns-resolver.sh"
+  bash "$HOME/archsetup/first-run/gnome-theme.sh"
+  floating-terminal "$HOME/archsetup/first-run/git-config.sh"
+  floating-terminal "$HOME/archsetup/first-run/dns.sh"
+  floating-terminal "$HOME/archsetup/first-run/ssh.sh"
+  sudo rm -f /etc/sudoers.d/first-run
+  notify-send "Setup complete. Enjoy!"
+  set-theme catppuccin
+fi

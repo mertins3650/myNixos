@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+  echo "Usage: set-theme <theme-name>"
+  exit 1
+fi
+
+THEMES_PATH="$HOME/archsetup/themes"
+CURRENT_THEME_PATH="$ARCHY_PATH/theme"
+
+THEME_NAME=$(echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+
+if [[ -d "$THEMES_PATH/$THEME_NAME" ]]; then
+  THEME_PATH="$THEMES_PATH/$THEME_NAME"
+else
+  echo "Theme '$THEME_NAME' does not exist"
+  exit 1
+fi
+
+mkdir -p "$CURRENT_THEME_PATH"
+
+shopt -s dotglob
+rm -f "$CURRENT_THEME_PATH"/*
+shopt -u dotglob
+ln -s "$THEME_PATH/background/background.png" "$CURRENT_THEME_PATH/background.png"
+ln -s "$THEME_PATH/hyprland/colors.conf" "$CURRENT_THEME_PATH/hyprland.conf"
+ln -s "$THEME_PATH/hyprlock/colors.conf" "$CURRENT_THEME_PATH/hyprlock.conf"
+ln -s "$THEME_PATH/ghostty/ghostty.conf" "$CURRENT_THEME_PATH/ghostty.conf"
+ln -s "$THEME_PATH/rofi/config.rasi" "$CURRENT_THEME_PATH/rofi.rasi"
+ln -s "$THEME_PATH/nvim/colors.lua" "$CURRENT_THEME_PATH/nvim.lua"
+ln -s "$THEME_PATH/tmux/tmux.conf" "$CURRENT_THEME_PATH/tmux.conf"
+ln -s "$THEME_PATH/theme.name" "$CURRENT_THEME_PATH/theme.name"
+theme-update

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+THEMES=()
+for theme in "$ARCH_SETUP_PATH/themes/"*; do
+  THEMES+=("$(basename "$theme")")
+done
+
+SELECTED_THEME=$(gum choose "${THEMES[@]}")
+
+set-theme "$SELECTED_THEME"

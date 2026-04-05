@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd ~/hearthstone-linux/hearthstone/
+./Bin/Hearthstone.x86_64

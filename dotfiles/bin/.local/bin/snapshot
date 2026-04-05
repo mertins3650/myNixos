@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+
+COMMAND="$1"
+TODAY=$(date +%Y-%m-%d)
+
+if [[ -z $COMMAND ]]; then
+  echo "Usage: snapshot <create|restore>" >&2
+  exit 1
+fi
+
+case "$COMMAND" in
+create)
+  DESC="$TODAY"
+
+  echo -e "\e[32mCreate system snapshot\e[0m"
+
+  mapfile -t CONFIGS < <(sudo snapper --csvout list-configs | awk -F, 'NR>1 {print $1}')
+
+  for config in "${CONFIGS[@]}"; do
+    sudo snapper -c "$config" create -c number -d "$DESC"
+  done
+  echo
+  ;;
+restore)
+  sudo limine-snapper-restore
+  ;;
+esac
