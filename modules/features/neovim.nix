@@ -5,7 +5,6 @@
     environment.systemPackages = with pkgs;[
       neovim
       lua
-      hererocks
     ];
   };
 }
