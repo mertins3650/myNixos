@@ -2,8 +2,8 @@
   flake.nixosModules.desktopenv = { pkgs, lib, ...}: {
 
     programs.hyprland = {
-      enable = true;
       withUWSM = true;
+      xwayland.enable = true;
     };
     environment.systemPackages = with pkgs;[
       fontconfig
