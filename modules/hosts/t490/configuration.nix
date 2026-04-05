@@ -6,6 +6,7 @@
 	self.nixosModules.t490Hardware
 	self.nixosModules.dotfiles
 	self.nixosModules.desktopenv
+	self.nixosModules.neovim
     ];
 
   # Bootloader.
