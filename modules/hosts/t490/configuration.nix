@@ -7,6 +7,7 @@
 	self.nixosModules.dotfiles
 	self.nixosModules.desktopenv
 	self.nixosModules.neovim
+	self.nixosModules.development
     ];
 
   # Bootloader.
