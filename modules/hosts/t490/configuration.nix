@@ -5,7 +5,7 @@
     [ 
             inputs.home-manager.nixosModules.home-manager
 	self.nixosModules.t490Hardware
-	self.homeModules.homeuser
+	self.nixosModules.user
 	self.nixosModules.desktopenv
 	self.nixosModules.neovim
 	self.nixosModules.development
