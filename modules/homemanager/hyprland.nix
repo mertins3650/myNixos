@@ -1,7 +1,6 @@
 { config, lib, ... }:
 {
     flake.homeModules.hyprland = { config, lib, ... }: {
-        programs.kitty.enable = true;
 
         wayland.windowManager.hyprland = {
             enable = true;
@@ -56,6 +55,7 @@
                     "$mainMod, Q, killactive,"
                     "$mainMod, D, exec, $menu"
                     "$mainMod, RETURN, exec, $terminal"
+                    "$mainMod, O, exec, ghostty"
                     "$mainMod CTRL, F, exec, uwsm app -- $fileManager --new-window"
                     "$mainMod SHIFT, F, exec, $terminal -e yazi"
                     "$mainMod, R, exec, $menu"
