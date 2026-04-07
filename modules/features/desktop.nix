@@ -14,7 +14,6 @@
       wl-clipboard
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
-      xdg-terminal-exec
       swaybg
       hypridle
       hyprlock

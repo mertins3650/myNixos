@@ -73,7 +73,6 @@
     wofi
     git
     rofi
-    ghostty
   ];
 
     
