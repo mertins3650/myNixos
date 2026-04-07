@@ -72,6 +72,7 @@
     kitty
     wofi
     git
+ghostty
     rofi
   ];
 
