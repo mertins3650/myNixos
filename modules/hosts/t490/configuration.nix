@@ -75,6 +75,14 @@
 ghostty
     rofi
   ];
+    xdg.terminal-exec = {
+      enable = true;
+   settings = {
+                default = [
+                    "ghostty.desktop"
+                ];
+            };
+        };
 
     
 programs.nix-ld = {
