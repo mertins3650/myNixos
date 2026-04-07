@@ -43,6 +43,9 @@
 
       enableZshIntegration = true;
     };
+    home.packages = [
+      pkgs.xdg-terminal-exec
+    ];
 
     xdg.terminal-exec = {
       enable = true;
