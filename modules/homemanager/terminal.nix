@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  flake.homeModules.keyring = { pkgs, ... }: {
+  flake.homeModules.terminal = { pkgs, ... }: {
     programs.ghostty = {
       enable = true;
 
