@@ -1,5 +1,5 @@
 { ... }: {
-    flake.homeModules.homeuser = {
+    flake.homeModules.simonm = {
         home.username = "simonm";
         home.homeDirectory = "/home/simonm";
         home.stateVersion = "25.11";

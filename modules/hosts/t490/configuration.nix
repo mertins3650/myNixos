@@ -3,7 +3,7 @@
   flake.nixosModules.t490Configuration = { pkgs, lib, ... }: {
   imports =
     [ 
-            inputs.home-manager.nixosModules.home-manager
+        inputs.home-manager.nixosModules.home-manager
 	self.nixosModules.t490Hardware
 	self.nixosModules.homemanager
 	self.nixosModules.desktopenv
@@ -12,7 +12,9 @@
 	self.nixosModules.base
     ];
 
-  # Bootloader.
+        home-manager.users.simonm.imports = [
+            self.homeModules.desktop
+        ];
 
   networking.hostName = "t490"; # Define your hostname.
 

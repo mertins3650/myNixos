@@ -4,7 +4,7 @@
         home-manager.useUserPackages = true;
 
         home-manager.users.simonm.imports = [
-            self.homeModules.homeuser
+            self.homeModules.simonm
         ];
     };
 }
