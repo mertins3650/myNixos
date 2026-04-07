@@ -189,7 +189,7 @@
                     gaps_in = 5;
                     gaps_out = 10;
                     border_size = 2;
-                    col.active_border = "$color1 $color2 $color3 $color4 90deg";
+                    col.active_border = "rgb(ebbcba) rgb(31748f) rgb(eb6f92s) rgb(c4a7e7) 0deg";
                     col.inactive_border = "rgba(595959aa)";
                     resize_on_border = false;
                     allow_tearing = false;
