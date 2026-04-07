@@ -8,7 +8,7 @@
 	settings = { 
 	"$mod" = "SUPER";
 	bind = [
-	"$mod, D, exec, rofi -show drun -run-command "uwsm app -- {cmd}""
+    "$mod, D, exec, rofi -show drun -run-command \"uwsm app -- {cmd}\""
 "$mod SHIFT, B, exec, firefox"
  ];
 
