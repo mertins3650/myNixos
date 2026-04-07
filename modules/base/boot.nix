@@ -31,6 +31,16 @@
             };
         };
     };
+services.displayManager = {
+  sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
+  autoLogin = {
+    enable = true;    
+    user = "simonm"; # Replace with the desired user
+  };
+};
   boot.initrd.systemd.enable = true;
   systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
   security.pam.services.sddm-autologin.text = pkgs.lib.mkBefore ''
