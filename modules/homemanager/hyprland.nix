@@ -10,6 +10,7 @@
 	bind = [
     "$mod, D, exec, rofi -show drun -run-command \"uwsm app -- {cmd}\""
 "$mod SHIFT, B, exec, firefox"
+"$mod SHIFT, O, exec, ghostty"
  ];
 
   };
