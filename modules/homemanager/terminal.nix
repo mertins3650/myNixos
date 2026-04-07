@@ -46,11 +46,9 @@
 
     xdg.terminal-exec = {
       enable = true;
-      package = pkgs.ghostty;
    settings = {
                 default = [
                     "ghostty.desktop"
-                    "kitty.desktop"
                 ];
             };
         };
