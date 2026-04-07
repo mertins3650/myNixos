@@ -12,38 +12,6 @@
     ];
 
   # Bootloader.
-{
-    boot = {
-        kernelParams = [ "quiet" "splash" ];
-
-        loader = {
-            timeout = 3;
-
-            efi.canTouchEfiVariables = true;
-
-            limine = {
-                enable = true;
-                maxGenerations = 5;
-                panicOnChecksumMismatch = false;
-
-                extraConfig = ''
-                    interface_branding: NixOS
-                    interface_branding_color: 2
-
-                    term_background: 1a1b26
-                    backdrop: 1a1b26
-
-                    term_palette: 15161e;f7768e;9ece6a;e0af68;7aa2f7;bb9af7;7dcfff;a9b1d6
-                    term_palette_bright: 414868;f7768e;9ece6a;e0af68;7aa2f7;bb9af7;7dcfff;c0caf5
-
-                    term_foreground: c0caf5
-                    term_foreground_bright: c0caf5
-                    term_background_bright: 24283b
-                '';
-            };
-        };
-    };
-}
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "t490"; # Define your hostname.
