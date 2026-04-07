@@ -1,5 +1,6 @@
 {self, input, ... }: {
-  flake.nixosModules.boot = { pkgs, lib, ...}: {
+  flake.nixosModules.base = { pkgs, lib, ...}: {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
     boot = {
         kernelParams = [ "quiet" "splash" ];
 
