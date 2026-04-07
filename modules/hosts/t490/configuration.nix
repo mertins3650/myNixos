@@ -15,6 +15,7 @@
         home-manager.users.simonm.imports = [
             self.homeModules.hyprland
             self.homeModules.keyring
+            self.homeModules.terminal
         ];
 
   networking.hostName = "t490"; # Define your hostname.
