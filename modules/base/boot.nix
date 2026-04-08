@@ -83,11 +83,17 @@
             };
         };
 
-        systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
+    boot.initrd.systemd.enable = true;
 
-        security.pam.services.sddm-autologin.text = pkgs.lib.mkBefore ''
-            auth optional ${pkgs.systemd}/lib/security/pam_systemd_loadkey.so
-            auth include sddm
-        '';
+    systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
+
+    security.pam.services.sddm.enableGnomeKeyring = true;
+    security.pam.services.sddm-autologin.enableGnomeKeyring = true;
+
+    security.pam.services.sddm-autologin.text = pkgs.lib.mkBefore ''
+        auth optional ${pkgs.systemd}/lib/security/pam_systemd_loadkey.so
+        auth include sddm
+    '';
+}
     };
 }
