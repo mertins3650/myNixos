@@ -15,7 +15,7 @@
 
                 substituteInPlace "$themeDir/nix.plymouth" \
                     --replace-fail 'ImageDir=.' "ImageDir=$themeDir" \
-                    --replace-fail 'ScriptFile=arch.script' "ScriptFile=$themeDir/nix.script"
+                    --replace-fail 'ScriptFile=nix.script' "ScriptFile=$themeDir/nix.script"
             '';
         };
     in {
