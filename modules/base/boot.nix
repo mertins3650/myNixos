@@ -76,7 +76,6 @@
             sddm = {
                 enable = true;
                 wayland.enable = true;
-		enableGnomeKeyring = true;
             };
             autoLogin = {
                 enable = true;
@@ -84,6 +83,8 @@
             };
         };
 services.gnome.gnome-keyring.enable = true;
+security.pam.services.sddm.enableGnomeKeyring = true;
+
 
 
         systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
