@@ -1,21 +1,21 @@
 { self, input, ... }: {
     flake.nixosModules.base = { pkgs, lib, ... }:
     let
-        nixPlymouthTheme = pkgs.stdenvNoCC.mkDerivation {
-            pname = "nix-plymouth-theme";
+        archPlymouthTheme = pkgs.stdenvNoCC.mkDerivation {
+            pname = "arch-plymouth-theme";
             version = "1.0";
             src = ../../defaults/plymouth;
             dontBuild = true;
 
             installPhase = ''
-                themeDir=$out/share/plymouth/themes/nix
+                themeDir=$out/share/plymouth/themes/arch
 
                 mkdir -p "$themeDir"
                 cp -r ./* "$themeDir"/
 
-                substituteInPlace "$themeDir/nix.plymouth" \
+                substituteInPlace "$themeDir/arch.plymouth" \
                     --replace-fail 'ImageDir=.' "ImageDir=$themeDir" \
-                    --replace-fail 'ScriptFile=nix.script' "ScriptFile=$themeDir/nix.script"
+                    --replace-fail 'ScriptFile=arch.script' "ScriptFile=$themeDir/arch.script"
             '';
         };
     in {
@@ -39,8 +39,8 @@
 
             plymouth = {
                 enable = true;
-                theme = "nix";
-                themePackages = [ nixPlymouthTheme ];
+                theme = "arch";
+                themePackages = [ archPlymouthTheme ];
             };
 
             loader = {

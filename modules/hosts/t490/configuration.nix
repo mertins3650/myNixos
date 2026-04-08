@@ -14,6 +14,7 @@
 
         home-manager.users.simonm.imports = [
             self.homeModules.hyprland
+            self.homeModules.waybar
             self.homeModules.keyring
             self.homeModules.terminal
         ];
