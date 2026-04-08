@@ -76,12 +76,15 @@
             sddm = {
                 enable = true;
                 wayland.enable = true;
+		enableGnomeKeyring = true;
             };
             autoLogin = {
                 enable = true;
                 user = "simonm";
             };
         };
+services.gnome.gnome-keyring.enable = true;
+
 
         systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
 
