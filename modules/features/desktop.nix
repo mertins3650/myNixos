@@ -10,7 +10,6 @@
       fontconfig
       swayosd
       mako
-      waybar
       wl-clipboard
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
