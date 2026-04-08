@@ -83,8 +83,6 @@
             };
         };
 
-    boot.initrd.systemd.enable = true;
-
     systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
 
     security.pam.services.sddm.enableGnomeKeyring = true;
