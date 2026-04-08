@@ -30,7 +30,7 @@
                 systemd.enable = true;
             };
 
-boot.plymouth = {
+plymouth = {
     enable = true;
     theme = "bgrt";
 };
