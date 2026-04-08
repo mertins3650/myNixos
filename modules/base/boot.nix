@@ -30,11 +30,10 @@
                 systemd.enable = true;
             };
 
-            plymouth = {
-                enable = true;
-                theme = "arch";
-                themePackages = [ archPlymouthTheme ];
-            };
+boot.plymouth = {
+    enable = true;
+    theme = "bgrt";
+};
 
             loader = {
                 timeout = 3;
