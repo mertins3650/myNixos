@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 {
-    flake.homeModules.theme = { config, lib, theme, ... }: {
+    flake.homeModules.theme = { config, lib, pkgs, ... }: {
 home.packages = with pkgs; [
     yaru-theme
     gnome-themes-extra
