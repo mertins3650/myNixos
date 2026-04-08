@@ -7,6 +7,7 @@
       xwayland.enable = true;
     };
     environment.systemPackages = with pkgs;[
+      nautilus
       fontconfig
       swayosd
       mako

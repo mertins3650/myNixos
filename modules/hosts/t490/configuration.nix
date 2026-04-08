@@ -17,6 +17,7 @@
             self.homeModules.waybar
             self.homeModules.keyring
             self.homeModules.terminal
+            self.homeModules.theme
         ];
 
   networking.hostName = "t490"; # Define your hostname.
