@@ -6,6 +6,18 @@
       withUWSM = true;
       xwayland.enable = true;
     };
+
+  programs.chromium = {
+    
+enable = true;
+extensions = [
+"dbepggeogbaibhgnhhndojpepiihcmeb;https://clients2.google.com/service/update2/crx" # vimium 
+"aeblfdkhhhdcdjpifhhbdiojplfjncoa;https://clients2.google.com/service/update2/crx" # 1password 
+"eimadpbcbfnmbkopoojfekhnkhdbieeh;https://clients2.google.com/service/update2/crx" # dark reader
+      
+    
+];
+};
     environment.systemPackages = with pkgs;[
       nautilus
       fontconfig

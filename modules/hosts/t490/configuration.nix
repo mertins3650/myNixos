@@ -61,8 +61,6 @@
     shell = pkgs.zsh;
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
   programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
