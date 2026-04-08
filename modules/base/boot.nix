@@ -92,6 +92,6 @@
         auth optional ${pkgs.systemd}/lib/security/pam_systemd_loadkey.so
         auth include sddm
     '';
-}
+};
     };
 }
