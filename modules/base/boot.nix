@@ -28,12 +28,14 @@
             initrd = {
                 verbose = false;
                 systemd.enable = true;
+                kernelModules = [ "i915" ];
             };
 
-plymouth = {
-    enable = true;
-    theme = "bgrt";
-};
+            plymouth = {
+                enable = true;
+                theme = "arch";
+                themePackages = [ archPlymouthTheme ];
+            };
 
             loader = {
                 timeout = 3;
