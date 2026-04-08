@@ -4,12 +4,18 @@
         archPlymouthTheme = pkgs.stdenvNoCC.mkDerivation {
             pname = "arch-plymouth-theme";
             version = "1.0";
-
             src = ../../defaults/plymouth;
+            dontBuild = true;
 
             installPhase = ''
-                mkdir -p $out/share/plymouth/themes/arch
-                cp -r ./* $out/share/plymouth/themes/arch/
+                themeDir=$out/share/plymouth/themes/arch
+
+                mkdir -p "$themeDir"
+                cp -r ./* "$themeDir"/
+
+                substituteInPlace "$themeDir/arch.plymouth" \
+                    --replace-fail 'ImageDir=.' "ImageDir=$themeDir" \
+                    --replace-fail 'ScriptFile=arch.script' "ScriptFile=$themeDir/arch.script"
             '';
         };
     in {
@@ -67,12 +73,10 @@
 
         services.displayManager = {
             defaultSession = "hyprland-uwsm";
-
             sddm = {
                 enable = true;
                 wayland.enable = true;
             };
-
             autoLogin = {
                 enable = true;
                 user = "simonm";
