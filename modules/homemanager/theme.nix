@@ -33,4 +33,5 @@ dconf.settings = {
     };
 };
 
+};
 }
