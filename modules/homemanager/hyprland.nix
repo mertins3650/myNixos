@@ -24,26 +24,28 @@
                     ''uwsm app -- swaybg -i "$ARCHY_PATH"/theme/background.png -m fill''
                     "uwsm app -- swayosd-server"
                     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-                    "arch-first-run"
                     "systemctl --user import-environment $(env | cut -d'=' -f 1)"
                     "dbus-update-activation-environment --systemd --all"
                 ];
 
-                env = [
-                    "HYPRCURSOR_SIZE,24"
-                    "GDK_BACKEND,wayland,x11,*"
-                    "QT_QPA_PLATFORM,wayland;xcb"
-                    "QT_STYLE_OVERRIDE,kvantum"
-                    "SDL_VIDEODRIVER,wayland"
-                    "MOZ_ENABLE_WAYLAND,1"
-                    "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-                    "OZONE_PLATFORM,wayland"
-                    "XDG_SESSION_TYPE,wayland"
-                    "XDG_CURRENT_DESKTOP,Hyprland"
-                    "XDG_SESSION_DESKTOP,Hyprland"
-                    "XCOMPOSEFILE,~/.XCompose"
-                    "GDK_SCALE,1"
-                ];
+env = [
+    "HYPRCURSOR_SIZE,24"
+    "GTK_THEME,Yaru-dark"
+    "XCURSOR_THEME,Yaru"
+    "XCURSOR_SIZE,24"
+    "GDK_BACKEND,wayland,x11,*"
+    "QT_QPA_PLATFORM,wayland;xcb"
+    "QT_STYLE_OVERRIDE,kvantum"
+    "SDL_VIDEODRIVER,wayland"
+    "MOZ_ENABLE_WAYLAND,1"
+    "ELECTRON_OZONE_PLATFORM_HINT,wayland"
+    "OZONE_PLATFORM,wayland"
+    "XDG_SESSION_TYPE,wayland"
+    "XDG_CURRENT_DESKTOP,Hyprland"
+    "XDG_SESSION_DESKTOP,Hyprland"
+    "XCOMPOSEFILE,~/.XCompose"
+    "GDK_SCALE,1"
+];
 
                 monitor = [
                     ",preferred,auto,1.25"
