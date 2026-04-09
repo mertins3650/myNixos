@@ -30,10 +30,5 @@
             yaru-theme
 	    impala
         ];
-
-        fonts.packages = with pkgs; [
-            nerd-fonts.caskaydia-mono
-            font-awesome
-        ];
     };
 }
