@@ -1,6 +1,6 @@
 
-{ ... }: {
-  flake.nixosModules.base = {  ...}: {
+{ pkgs, ... }: {
+  flake.nixosModules.base = { pkgs,  ...}: {
 networking.wireless.iwd.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   services.xserver.enable = true;
