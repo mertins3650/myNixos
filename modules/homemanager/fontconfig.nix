@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{ ... }:
 {
     flake.homeModules.fontconfig =
+        { pkgs, ... }:
         {
             fonts.fontconfig = {
                 enable = true;
@@ -53,7 +54,7 @@
             home.packages = with pkgs; [
                 liberation_ttf
                 nerd-fonts.caskaydia-mono
-	        font-awesome
+		font-awesome
             ];
         };
 }
