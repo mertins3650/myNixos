@@ -1,22 +1,24 @@
 { self, input, ... }: {
-flake.nixosModules.base = { pkgs, lib, ... }:
-let
-  pname = "arch-plymouth-theme";
-  version = "1.0";
-  src = ../../defaults/plymouth;
-  dontBuild = true;
+    flake.nixosModules.base = { pkgs, lib, ... }:
+    let
+        archPlymouthTheme = pkgs.stdenvNoCC.mkDerivation {
+            pname = "arch-plymouth-theme";
+            version = "1.0";
+            src = ../../defaults/plymouth;
+            dontBuild = true;
 
-  installPhase = ''
-    themeDir=$out/share/plymouth/themes/arch
+            installPhase = ''
+                themeDir=$out/share/plymouth/themes/arch
 
-    mkdir -p "$themeDir"
-    cp -r ./* "$themeDir"/
+                mkdir -p "$themeDir"
+                cp -r ./* "$themeDir"/
 
-    substituteInPlace "$themeDir/arch.plymouth" \
-      --replace-fail 'ImageDir=.' "ImageDir=$themeDir" \
-      --replace-fail 'ScriptFile=arch.script' "ScriptFile=$themeDir/arch.script"
-  '';
-in {
+                substituteInPlace "$themeDir/arch.plymouth" \
+                    --replace-fail 'ImageDir=.' "ImageDir=$themeDir" \
+                    --replace-fail 'ScriptFile=arch.script' "ScriptFile=$themeDir/arch.script"
+            '';
+        };
+    in {
         boot.kernelPackages = pkgs.linuxPackages_latest;
 
         boot = {
@@ -79,11 +81,9 @@ in {
                 user = "simonm";
             };
         };
-services.gnome.gnome-keyring.enable = true;
-security.pam.services.sddm.enableGnomeKeyring = true;
 
-
-
+        services.gnome.gnome-keyring.enable = true;
+        security.pam.services.sddm.enableGnomeKeyring = true;
         systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
 
         security.pam.services.sddm-autologin.text = pkgs.lib.mkBefore ''
