@@ -50,8 +50,6 @@
     kitty
     wofi
     git
-ghostty
-    rofi
   ];
     xdg.terminal-exec = {
       enable = true;
