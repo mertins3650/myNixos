@@ -1,7 +1,6 @@
 { self, input, ... }: {
     flake.nixosModules.base = { pkgs, lib, ... }:
     let
-        archPlymouthTheme = pkgs.stdenvNoCC.mkDerivation {
             pname = "arch-plymouth-theme";
             version = "1.0";
             src = ../../defaults/plymouth;
@@ -34,7 +33,6 @@
             initrd = {
                 verbose = false;
                 systemd.enable = true;
-                kernelModules = [ "i915" ];
             };
 
             plymouth = {

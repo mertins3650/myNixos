@@ -1,5 +1,7 @@
 { ... }: {
   flake.nixosModules.base = {  ...}: {
+  console.keyMap = "dk-latin1";
+
   time.timeZone = "Europe/Copenhagen";
 
   i18n.defaultLocale = "en_DK.UTF-8";
@@ -14,6 +16,10 @@
     LC_PAPER = "da_DK.UTF-8";
     LC_TELEPHONE = "da_DK.UTF-8";
     LC_TIME = "da_DK.UTF-8";
+  };
+  services.xserver.xkb = {
+    layout = "dk";
+    variant = "";
   };
 };
 }

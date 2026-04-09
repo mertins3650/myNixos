@@ -20,6 +20,7 @@
             self.homeModules.theme
         ];
 
+	boot.initrd.kernelModules = [ "i915" ];
   networking.hostName = "t490"; # Define your hostname.
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -31,28 +32,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "dk";
-    variant = "";
-  };
-
-  # Configure console keymap
-  console.keyMap = "dk-latin1";
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   users.users.simonm = {
     isNormalUser = true;
