@@ -18,6 +18,7 @@
             self.homeModules.keyring
             self.homeModules.terminal
             self.homeModules.theme
+            self.homeModules.rofi
         ];
 
 	boot.initrd.kernelModules = [ "i915" ];
