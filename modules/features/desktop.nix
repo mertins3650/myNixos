@@ -18,9 +18,6 @@
         environment.systemPackages = with pkgs; [
             chromium
             nautilus
-            fontconfig
-            swayosd
-            mako
             wl-clipboard
             xdg-desktop-portal-gtk
             xdg-desktop-portal-hyprland
@@ -31,7 +28,7 @@
             fcitx5-gtk
             libsForQt5.fcitx5-qt
             yaru-theme
-impala
+	    impala
         ];
 
         fonts.packages = with pkgs; [

@@ -19,6 +19,9 @@
             self.homeModules.terminal
             self.homeModules.theme
             self.homeModules.rofi
+            self.homeModules.swayosd
+            self.homeModules.mako
+            self.homeModules.fontsconfig
         ];
 
 	boot.initrd.kernelModules = [ "i915" ];
@@ -48,7 +51,6 @@
     vim 
     wget
     curl
-    kitty
     wofi
     git
   ];
