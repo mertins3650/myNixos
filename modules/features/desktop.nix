@@ -31,6 +31,7 @@
             fcitx5-gtk
             libsForQt5.fcitx5-qt
             yaru-theme
+impala
         ];
 
         fonts.packages = with pkgs; [
