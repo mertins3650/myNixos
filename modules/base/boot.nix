@@ -1,23 +1,22 @@
 { self, input, ... }: {
-    flake.nixosModules.base = { pkgs, lib, ... }:
-    let
-            pname = "arch-plymouth-theme";
-            version = "1.0";
-            src = ../../defaults/plymouth;
-            dontBuild = true;
+flake.nixosModules.base = { pkgs, lib, ... }:
+let
+  pname = "arch-plymouth-theme";
+  version = "1.0";
+  src = ../../defaults/plymouth;
+  dontBuild = true;
 
-            installPhase = ''
-                themeDir=$out/share/plymouth/themes/arch
+  installPhase = ''
+    themeDir=$out/share/plymouth/themes/arch
 
-                mkdir -p "$themeDir"
-                cp -r ./* "$themeDir"/
+    mkdir -p "$themeDir"
+    cp -r ./* "$themeDir"/
 
-                substituteInPlace "$themeDir/arch.plymouth" \
-                    --replace-fail 'ImageDir=.' "ImageDir=$themeDir" \
-                    --replace-fail 'ScriptFile=arch.script' "ScriptFile=$themeDir/arch.script"
-            '';
-        };
-    in {
+    substituteInPlace "$themeDir/arch.plymouth" \
+      --replace-fail 'ImageDir=.' "ImageDir=$themeDir" \
+      --replace-fail 'ScriptFile=arch.script' "ScriptFile=$themeDir/arch.script"
+  '';
+in {
         boot.kernelPackages = pkgs.linuxPackages_latest;
 
         boot = {
