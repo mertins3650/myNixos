@@ -18,6 +18,7 @@
             self.homeModules.keyring
             self.homeModules.terminal
             self.homeModules.theme
+            self.homeModules.tmux
             self.homeModules.rofi
             self.homeModules.swayosd
             self.homeModules.mako
