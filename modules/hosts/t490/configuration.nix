@@ -20,6 +20,7 @@
             self.homeModules.theme
             self.homeModules.tmux
             self.homeModules.rofi
+            self.homeModules.shell
             self.homeModules.swayosd
             self.homeModules.mako
             self.homeModules.fontconfig
