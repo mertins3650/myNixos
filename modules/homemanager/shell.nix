@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-    flake.homeModules.shell = {
+    flake.homeModules.shell = { pkgs, ... }: {
         programs.zsh = {
             enable = true;
             enableCompletion = true;
