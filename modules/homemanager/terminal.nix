@@ -4,6 +4,7 @@
       enable = true;
 
       settings = {
+	command = "tmux";
         # Dynamic theme colors
         theme = "Rose Pine";
 
