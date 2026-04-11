@@ -1,6 +1,9 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 {
-    flake.homeModules.hyprland = { config, lib, ... }: {
+    flake.homeModules.hyprland = { config, lib, pkgs, ... }: {
+home.packages = with pkgs; [
+    xdg-desktop-portal-gtk
+];
 
         wayland.windowManager.hyprland = {
             enable = true;
