@@ -126,6 +126,8 @@
             zoxide
             yazi
             ripgrep
+curl
+wget
         ];
     };
 }

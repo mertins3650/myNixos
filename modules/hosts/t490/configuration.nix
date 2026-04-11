@@ -6,6 +6,7 @@
         inputs.home-manager.nixosModules.home-manager
 	self.nixosModules.t490Hardware
 	self.nixosModules.homemanager
+	self.nixosModules.gaming
 	self.nixosModules.desktopenv
 	self.nixosModules.development
 	self.nixosModules.base
@@ -44,9 +45,6 @@
 
   environment.systemPackages = with pkgs; [
     vim 
-    wget
-    curl
-    git
   ];
     
   system.stateVersion = "25.11"; # Did you read the comment?

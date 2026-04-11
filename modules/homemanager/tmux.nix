@@ -9,23 +9,23 @@
             baseIndex = 1;
             prefix = "C-a";
 
-            extraConfig = ''
-                unbind C-b
-                bind-key C-a send-prefix
+extraConfig = ''
+    unbind C-b
+    bind-key C-a send-prefix
 
-                # Status line
-                set -g status-style 'bg=#181825 fg=#c0caf5'
-                set -g status-left-style 'bg=#181825 fg=#e0e0e0 bold'
-                set -g status-right-style 'bg=#181825 fg=#e0e0e0 bold'
+    # Status line
+    set -g status-style 'bg=#12111a fg=#c0caf5'
+    set -g status-left-style 'bg=#12111a fg=#e0e0e0 bold'
+    set -g status-right-style 'bg=#12111a fg=#e0e0e0 bold'
 
-                set -g status-left '#[fg=#e0e0e0,bold] #[bold][#S] #[fg=#3b4261]| '
-                set -g status-left-length 30
+    set -g status-left '#[fg=#e0e0e0,bold] #[bold][#S] #[fg=#3b4261]| '
+    set -g status-left-length 30
 
-                # Window list
-                set -g window-status-style 'bg=#181825 fg=#565f89 dim'
-                set -g window-status-current-style 'bg=#181825 fg=#ea9a97 bold'
-                set -g window-status-format ' #I:#W '
-                set -g window-status-current-format ' #[bold]#I:#W '
+    # Window list
+    set -g window-status-style 'bg=#12111a fg=#565f89 dim'
+    set -g window-status-current-style 'bg=#12111a fg=#ea9a97 bold'
+    set -g window-status-format ' #I:#W '
+    set -g window-status-current-format ' #[bold]#I:#W '
 
                 # Pane borders
                 set -g pane-border-style 'fg=#3b4261'
