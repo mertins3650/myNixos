@@ -17,6 +17,7 @@
             self.homeModules.hypridle
             self.homeModules.hyprlock
             self.homeModules.waybar
+            self.homeModules.chromium
             self.homeModules.keyring
             self.homeModules.terminal
             self.homeModules.theme
