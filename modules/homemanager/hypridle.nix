@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
     flake.homeModules.hypridle = {
         services.hypridle = {
@@ -25,5 +25,9 @@
                 ];
             };
         };
+
+        home.packages = with pkgs; [
+            hypridle
+        ];
     };
 }
