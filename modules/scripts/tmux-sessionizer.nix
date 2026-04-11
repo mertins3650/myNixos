@@ -4,13 +4,13 @@
         { config, pkgs, ... }:
         {
             home.file.".tmux-sessionizer".source =
-                ./tmux-sessionizer/.tmux-sessionizer;
+                ../tmux-sessionizer/.tmux-sessionizer;
 
             xdg.configFile."tmux-sessionizer/tmux-sessionizer.conf".source =
-                ./tmux-sessionizer/tmux-sessionizer.conf;
+                ../tmux-sessionizer/tmux-sessionizer.conf;
 
             home.file.".local/bin/tmux-sessionizer" = {
-                source = ./tmux-sessionizer/tmux-sessionizer;
+                source = ../tmux-sessionizer/tmux-sessionizer;
                 executable = true;
             };
 
