@@ -13,8 +13,7 @@
         environment.systemPackages = with pkgs; [
             nautilus
             wl-clipboard
-            xdg-desktop-portal-gtk
-            xdg-desktop-portal-hyprland
+	    glib
             swaybg
 	    brightnessctl
             yaru-theme
@@ -22,5 +21,26 @@
 	    wiremix
 	    impala
         ];
+	xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+
+    extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
+    ];
+
+    config = {
+        hyprland = {
+            default = [ "hyprland" "gtk" ];
+
+            "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
+            "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+            "org.freedesktop.impl.portal.AppChooser" = [ "gtk" ];
+            "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+            "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+        };
+    };
+};
     };
 }

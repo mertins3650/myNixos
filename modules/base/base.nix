@@ -3,6 +3,7 @@
   flake.nixosModules.base = { pkgs,  ...}: {
 networking.wireless.iwd.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  programs.dconf.enable = true;
   services.xserver.enable = true;
   nixpkgs.config.allowUnfree = true;
   services.openssh.enable = true;

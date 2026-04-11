@@ -4,10 +4,19 @@
         home.packages = with pkgs; [
             adwaita-icon-theme
             gnome-themes-extra
+            glib
         ];
 
         gtk = {
             enable = true;
+
+            gtk3.extraConfig = {
+                gtk-application-prefer-dark-theme = 1;
+            };
+
+            gtk4.extraConfig = {
+                gtk-application-prefer-dark-theme = 1;
+            };
 
             theme = {
                 name = "Adwaita-dark";
