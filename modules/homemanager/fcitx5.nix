@@ -1,23 +1,17 @@
 { pkgs, ... }:
 {
-    flake.homeModules.fcitx5 = { pkgs, ... }: {
+    flake.homeModules.fcitx5 = { ... }: {
         i18n.inputMethod = {
-            enabled = "fcitx5";
+            enable = true;
+            type = "fcitx5";
 
             fcitx5 = {
                 addons = with pkgs; [
                     fcitx5-gtk
-                    kdePackages.fcitx5-qt
-                    fcitx5-configtool
+                    qt6Packages.fcitx5-configtool
                 ];
 
                 settings = {
-                    globalOptions = {
-                        Hotkey = {
-                            EnumerateWithTriggerKeys = true;
-                        };
-                    };
-
                     inputMethod = {
                         GroupOrder."0" = "Default";
 
