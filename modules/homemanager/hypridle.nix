@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-    flake.homeModules.hypridle = {
+    flake.homeModules.hypridle = { pkgs, ...}: {
         services.hypridle = {
             enable = true;
 
