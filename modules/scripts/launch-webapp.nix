@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-    flake.homeModules.scripts = {
+    flake.homeModules.scripts = { pkgs, ...}:  {
         home.packages = [
             (pkgs.writeShellApplication {
                 name = "launch-webapp";
