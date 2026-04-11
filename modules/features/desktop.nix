@@ -7,7 +7,6 @@
         };
 
         environment.systemPackages = with pkgs; [
-            chromium
             nautilus
             wl-clipboard
             xdg-desktop-portal-gtk
@@ -18,6 +17,8 @@
             fcitx5-gtk
             libsForQt5.fcitx5-qt
             yaru-theme
+	    bluetui
+	    wiremix
 	    impala
         ];
     };
