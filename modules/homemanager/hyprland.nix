@@ -12,7 +12,7 @@
                 "$mainMod" = "SUPER";
                 "$terminal" = "uwsm app -- $TERMINAL";
                 "$browser" = "launch-browser";
-                "$fileManager" = "nautilus";
+                "$fileManager" = "thunar";
                 "$menu" = "uwsm app -- rofi -show drun";
                 "$osdclient" = ''swayosd-client --monitor "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')"'';
 

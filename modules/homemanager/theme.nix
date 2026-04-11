@@ -10,20 +10,19 @@
         gtk = {
             enable = true;
 
-            gtk3.extraConfig = {
+            theme = {
+                name = "Adwaita-dark";
+                package = pkgs.gnome-themes-extra;
+            };
+
+gtk4.theme = null;
+	    gtk3.extraConfig = {
                 gtk-application-prefer-dark-theme = 1;
             };
 
             gtk4.extraConfig = {
                 gtk-application-prefer-dark-theme = 1;
             };
-
-            theme = {
-                name = "Adwaita-dark";
-                package = pkgs.gnome-themes-extra;
-            };
-
-            gtk4.theme = null;
 
             iconTheme = {
                 name = "Adwaita";
@@ -44,6 +43,7 @@
             gtk.enable = true;
             x11.enable = true;
         };
+
 
         dconf.settings = {
             "org/gnome/desktop/interface" = {

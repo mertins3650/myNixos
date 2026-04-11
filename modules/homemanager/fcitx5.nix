@@ -1,37 +1,39 @@
 { pkgs, ... }:
 {
     flake.homeModules.fcitx5 = { pkgs, ... }: {
-        i18n.inputMethod = {
-            enable = true;
-            type = "fcitx5";
+    i18n.inputMethod = {
+        enable = true;
+        type = "fcitx5";
 
-            fcitx5 = {
-                addons = with pkgs; [
-                    fcitx5-gtk
-                    qt6Packages.fcitx5-configtool
-                ];
+        fcitx5 = {
+            waylandFrontend = true;
 
-                settings = {
-                    inputMethod = {
-                        GroupOrder."0" = "Default";
+            addons = with pkgs; [
+                fcitx5-gtk
+                qt6Packages.fcitx5-configtool
+            ];
 
-                        "Groups/0" = {
-                            Name = "Default";
-                            "Default Layout" = "dk";
-                            DefaultIM = "keyboard-dk";
-                        };
+            settings = {
+                inputMethod = {
+                    GroupOrder."0" = "Default";
 
-                        "Groups/0/Items/0" = {
-                            Name = "keyboard-dk";
-                            Layout = "";
-                        };
+                    "Groups/0" = {
+                        Name = "Default";
+                        "Default Layout" = "dk";
+                        DefaultIM = "keyboard-dk";
+                    };
+
+                    "Groups/0/Items/0" = {
+                        Name = "keyboard-dk";
+                        Layout = "";
                     };
                 };
             };
         };
-
-        home.sessionVariables = {
-    XMODIFIERS = "@im=fcitx";
-};
     };
+
+    home.sessionVariables = {
+        XMODIFIERS = "@im=fcitx";
+    };
+};
 }
