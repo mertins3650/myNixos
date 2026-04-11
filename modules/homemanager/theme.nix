@@ -14,6 +14,8 @@
                 package = pkgs.gnome-themes-extra;
             };
 
+            gtk4.theme = null;
+
             iconTheme = {
                 name = "Adwaita";
                 package = pkgs.adwaita-icon-theme;
