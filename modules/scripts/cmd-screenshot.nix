@@ -10,11 +10,14 @@
                         coreutils
                         gnugrep
                         grim
+                        hyprland
+                        jq
                         libnotify
                         procps
                         satty
                         slurp
                         util-linux
+                        wl-clipboard
                         wayfreeze
                     ];
 
