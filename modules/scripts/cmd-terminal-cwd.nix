@@ -1,3 +1,7 @@
+{ ... }:
+{
+    flake.homeModules.scripts =
+        { config, pkgs, ... }: {
 (pkgs.writeShellApplication {
     name = "cmd-terminal-cwd";
     runtimeInputs = with pkgs; [
@@ -26,3 +30,4 @@
         fi
     '';
 })
+}

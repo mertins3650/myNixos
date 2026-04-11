@@ -1,3 +1,7 @@
+{ ... }:
+{
+    flake.homeModules.scripts =
+        { config, pkgs, ... }: {
 (pkgs.writeShellApplication {
     name = "launch-browser";
     runtimeInputs = with pkgs; [
@@ -28,3 +32,4 @@
         exec setsid uwsm app -- "$browser" "''${args[@]}"
     '';
 })
+}

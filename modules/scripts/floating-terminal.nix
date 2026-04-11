@@ -1,3 +1,7 @@
+{ ... }:
+{
+    flake.homeModules.scripts =
+        { config, pkgs, ... }: {
 (pkgs.writeShellApplication {
     name = "floating-terminal";
     runtimeInputs = with pkgs; [
@@ -12,3 +16,4 @@
         exec setsid uwsm app -- xdg-terminal-exec --app-id=org.nixy.terminal --title=nixy -e bash -c "$cmd"
     '';
 })
+}
