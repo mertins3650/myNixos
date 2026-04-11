@@ -7,7 +7,6 @@
 	self.nixosModules.t490Hardware
 	self.nixosModules.homemanager
 	self.nixosModules.desktopenv
-	self.nixosModules.neovim
 	self.nixosModules.development
 	self.nixosModules.base
     ];
@@ -28,6 +27,7 @@
             self.homeModules.swayosd
             self.homeModules.mako
             self.homeModules.fontconfig
+            self.homeModules.git
         ];
 
 	boot.initrd.kernelModules = [ "i915" ];

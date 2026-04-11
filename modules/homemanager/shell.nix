@@ -124,6 +124,7 @@
             bat
             fzf
             zoxide
+            yazi
             ripgrep
         ];
     };
