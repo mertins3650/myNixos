@@ -33,6 +33,7 @@
 
 	boot.initrd.kernelModules = [ "i915" ];
   networking.hostName = "t490"; # Define your hostname.
+services.thermald.enable = true;
 
   users.users.simonm = {
     isNormalUser = true;
