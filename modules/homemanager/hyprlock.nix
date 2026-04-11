@@ -1,0 +1,59 @@
+{ ... }:
+{
+    flake.homeModules.hyprlock = {
+        programs.hyprlock = {
+            enable = true;
+
+            settings = {
+                "$color" = "rgba(25, 23, 36, 1)";
+                "$inner_color" = "rgba(25, 23, 36, 1)";
+                "$outer_color" = "rgba(49, 116, 143, 1)";
+                "$font_color" = "rgba(224, 222, 244, 1)";
+                "$placeholder_color" = "rgba(205,214,244,0.6)";
+                "$check_color" = "rgba(196,167,231,1)";
+
+                general = {
+                    ignore_empty_input = true;
+                };
+
+                background = {
+                    monitor = "";
+                    color = "$color";
+                    path = "/home/simonm/myNixos/defaults/background.png";
+                    blur_passes = 3;
+                };
+
+                animations = {
+                    enabled = false;
+                };
+
+                input-field = {
+                    monitor = "";
+                    size = "650, 100";
+                    position = "0, 0";
+                    halign = "center";
+                    valign = "center";
+
+                    inner_color = "$inner_color";
+                    outer_color = "$outer_color";
+                    outline_thickness = 4;
+
+                    font_family = "CaskaydiaMono Nerd Font";
+                    font_color = "$font_color";
+
+                    placeholder_text = "Enter Password";
+                    check_color = "$check_color";
+                    fail_text = "<i>$FAIL ($ATTEMPTS)</i>";
+
+                    rounding = 0;
+                    shadow_passes = 0;
+                    fade_on_empty = false;
+                };
+
+                auth = {
+                    "fingerprint:enabled" = true;
+                };
+            };
+        };
+    };
+}
