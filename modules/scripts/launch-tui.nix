@@ -14,8 +14,11 @@
                     ];
 
                     text = ''
+                        app_name="$(basename "$1")"
+                        app_id="org.nixy.$app_name"
+
                         exec setsid uwsm app -- xdg-terminal-exec \
-                            --app-id=org.nixy.$(basename "$1") \
+                            --app-id="$app_id" \
                             -e "$1" "''${@:2}"
                     '';
                 })

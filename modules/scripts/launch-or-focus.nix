@@ -8,7 +8,6 @@
                     name = "launch-or-focus";
                     runtimeInputs = with pkgs; [
                         coreutils
-                        gnused
                         hyprland
                         jq
                         util-linux
@@ -26,7 +25,7 @@
                         if [[ -n "$WINDOW_ADDRESS" ]]; then
                             hyprctl dispatch focuswindow "address:$WINDOW_ADDRESS"
                         else
-                            eval exec setsid $LAUNCH_COMMAND
+                            eval exec setsid "$LAUNCH_COMMAND"
                         fi
                     '';
                 })

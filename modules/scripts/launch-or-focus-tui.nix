@@ -13,7 +13,7 @@
 
                     text = ''
                         APP_ID="org.nixy.$(basename "$1")"
-                        LAUNCH_COMMAND="launch-tui $@"
+                        LAUNCH_COMMAND="launch-tui $*"
 
                         exec launch-or-focus "$APP_ID" "$LAUNCH_COMMAND"
                     '';
