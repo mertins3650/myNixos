@@ -123,6 +123,7 @@
             eza
             bat
             fzf
+	    btop
             zoxide
             yazi
             ripgrep

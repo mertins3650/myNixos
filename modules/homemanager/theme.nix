@@ -4,21 +4,20 @@
         home.packages = with pkgs; [
             yaru-theme
             gnome-themes-extra
-            adwaita-icon-theme
         ];
 
         gtk = {
             enable = true;
 
             theme = {
-                name = "Yaru-dark";
+                name = "Yaru-blue-dark";
                 package = pkgs.yaru-theme;
             };
 
             gtk4.theme = config.gtk.theme;
 
             iconTheme = {
-                name = "Yaru";
+                name = "Yaru-blue";
                 package = pkgs.yaru-theme;
             };
 
@@ -40,8 +39,8 @@
         dconf.settings = {
             "org/gnome/desktop/interface" = {
                 color-scheme = "prefer-dark";
-                gtk-theme = "Yaru-dark";
-                icon-theme = "Yaru";
+                gtk-theme = "Yaru-blue-dark";
+                icon-theme = "Yaru-blue";
                 cursor-theme = "Yaru";
             };
         };

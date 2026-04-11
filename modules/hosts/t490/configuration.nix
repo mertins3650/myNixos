@@ -15,6 +15,7 @@
         home-manager.users.simonm.imports = [
             self.homeModules.hyprland
             self.homeModules.hypridle
+            self.homeModules.fcitx5
             self.homeModules.hyprlock
             self.homeModules.waybar
             self.homeModules.chromium

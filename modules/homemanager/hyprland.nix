@@ -20,7 +20,6 @@
                     "uwsm app -- hypridle"
                     "uwsm app -- mako"
                     "uwsm app -- waybar"
-                    "uwsm app -- fcitx5"
                     "uwsm app -- swaybg -i /home/simonm/myNixos/defaults/background.png -m fill"
                     "uwsm app -- swayosd-server"
                     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"

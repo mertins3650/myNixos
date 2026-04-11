@@ -15,10 +15,7 @@
             xdg-desktop-portal-gtk
             xdg-desktop-portal-hyprland
             swaybg
-            fcitx5
 	    brightnessctl
-            fcitx5-gtk
-            libsForQt5.fcitx5-qt
             yaru-theme
 	    bluetui
 	    wiremix
