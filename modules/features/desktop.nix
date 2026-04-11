@@ -7,6 +7,11 @@
         };
 
         programs.chromium = {
+	    commandLineArgs = [
+		"--ozone-platform=wayland"
+		"--ozone-platform-hint=wayland"
+	    ];
+
             enable = true;
             extensions = [
                 "dbepggeogbaibhgnhhndojpepiihcmeb;https://clients2.google.com/service/update2/crx" # vimium
