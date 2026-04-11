@@ -19,6 +19,7 @@
             self.homeModules.waybar
             self.homeModules.chromium
             self.homeModules.keyring
+            self.homeModules.scripts
             self.homeModules.terminal
             self.homeModules.theme
             self.homeModules.tmux
