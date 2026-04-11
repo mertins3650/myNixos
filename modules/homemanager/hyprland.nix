@@ -150,7 +150,7 @@ env = [
                     "float on, match:tag floating-window"
                     "center on, match:tag floating-window"
                     "size 875 600, match:tag floating-window"
-                    "tag +floating-window, match:class (org.archy.bluetui|org.archy.impala|org.archy.wiremix|org.archy.btop|org.archy.terminal|org.archy.bash|org.gnome.NautilusPreviewer|org.gnome.Evince|com.gabm.satty|archy|About|TUI.float|imv|mpv)"
+                    "tag +floating-window, match:class (org.nixy.bluetui|org.nixy.impala|org.nixy.wiremix|org.nixy.btop|org.nixy.terminal|org.nixy.bash|org.gnome.NautilusPreviewer|org.gnome.Evince|com.gabm.satty|nixy|About|TUI.float|imv|mpv)"
                     "tag +floating-window, match:class (xdg-desktop-portal-gtk|sublime_text|DesktopEditors|org.gnome.Nautilus), match:title ^(Open.*Files?|Open [F|f]older.*|Save.*Files?|Save.*As|Save|All Files|.*wants to [open|save].*|[C|c]hoose.*)"
                     "float on, match:class org.gnome.Calculator"
                     "float on, match:class steam"
