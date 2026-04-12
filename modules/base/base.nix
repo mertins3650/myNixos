@@ -1,18 +1,20 @@
 
 { pkgs, ... }: {
   flake.nixosModules.base = { pkgs,  ...}: {
-networking.wireless.iwd.enable = true;
+  networking = {
+	wireless.iwd.enable = true;
+	firewall.enable = true;
+  };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   programs.dconf.enable = true;
-  services.xserver.enable = true;
   nixpkgs.config.allowUnfree = true;
   services.openssh.enable = true;
+  services.xserver.enable = true;
   services.printing.enable = true;
 programs.nix-ld = {
         enable = true;
         libraries = with pkgs; [
 	   alsa-lib
-            pulseaudio
             libGL
             libglvnd
             vulkan-loader
