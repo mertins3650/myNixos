@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ ... }: {
     flake.homeModules.simonm = { lib, ... }: {
         home.username = "simonm";
         home.homeDirectory = "/home/simonm";

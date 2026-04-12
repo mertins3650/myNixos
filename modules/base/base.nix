@@ -1,5 +1,4 @@
-
-{ pkgs, ... }: {
+{ ... }: {
   flake.nixosModules.base = { pkgs,  ...}: {
   networking = {
 	wireless.iwd.enable = true;

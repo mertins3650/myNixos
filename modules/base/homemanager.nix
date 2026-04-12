@@ -1,8 +1,16 @@
 { self, ... }: {
-    flake.nixosModules.homemanager = { ... }: {
+    flake.nixosModules.homemanager = { pkgs, ... }: {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
 
+  users.users.simonm = {
+    isNormalUser = true;
+    description = "Simon Mertins";
+    extraGroups = [ "networkmanager" "wheel" "docker"];
+    shell = pkgs.zsh;
+  };
+
+  programs.zsh.enable = true;
         home-manager.users.simonm.imports = [
             self.homeModules.simonm
         ];
