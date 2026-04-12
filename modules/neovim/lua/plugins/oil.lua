@@ -1,6 +1,5 @@
 return {
 	"oil-nvim",
-	cmd = "Oil",
 	after = function()
 		function _G.get_oil_winbar()
 			local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
