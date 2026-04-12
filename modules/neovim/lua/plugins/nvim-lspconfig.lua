@@ -84,19 +84,5 @@ return {
             },
         })
         vim.lsp.enable("nixd")
-
-        vim.lsp.config("gleam", { on_attach = on_attach, capabilities = capabilities })
-        vim.lsp.enable("gleam")
-
-        -- ============================= VJXL ============================= --
-
-        vim.lsp.config['parser4'] = {
-            cmd = { '/home/yurii/Videos/parser4/target/release/parser4', 'lsp' },
-            filetypes = { 'vjxl' },
-            root_markers = { '.git' },
-            root_dir = vim.fn.getcwd(),
-        }
-        vim.lsp.config("parser4", { on_attach = on_attach, capabilities = capabilities })
-        vim.lsp.enable('parser4')
     end,
 }
