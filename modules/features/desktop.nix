@@ -1,5 +1,5 @@
 { self, inputs, ... }: {
-    flake.nixosModules.desktopenv = { pkgs, lib, ... }: {
+    flake.nixosModules.desktopenv = { pkgs, lib, self', ... }: {
         programs.hyprland = {
             enable = true;
             withUWSM = true;
@@ -31,16 +31,17 @@ xdg.portal = {
         };
     };
 };
-        environment.systemPackages = with pkgs; [
-            wl-clipboard
-	nautilus
-            glib
-            swaybg
-            brightnessctl
-            yaru-theme
-            bluetui
-            wiremix
-            impala
-        ];
+environment.systemPackages = [
+    self'.packages.neovim
+    pkgs.wl-clipboard
+    pkgs.nautilus
+    pkgs.glib
+    pkgs.swaybg
+    pkgs.brightnessctl
+    pkgs.yaru-theme
+    pkgs.bluetui
+    pkgs.wiremix
+    pkgs.impala
+];
     };
 }
