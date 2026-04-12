@@ -15,7 +15,7 @@ home.packages = with pkgs; [
                 "$mainMod" = "SUPER";
                 "$terminal" = "uwsm app -- $TERMINAL";
                 "$browser" = "launch-browser";
-                "$fileManager" = "thunar";
+                "$fileManager" = "nautilus";
                 "$menu" = "uwsm app -- rofi -show drun";
                 "$osdclient" = ''swayosd-client --monitor "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')"'';
 
