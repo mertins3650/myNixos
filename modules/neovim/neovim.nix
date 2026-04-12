@@ -14,11 +14,12 @@
     perSystem = { pkgs, ... }: {
         packages.myNeovim = inputs.wrapper-modules.wrappers.neovim.wrap {
             inherit pkgs;
-            settings = {
-                imports = [
-                    self.modules.neovim.lsp
-                ];
-            };
+
+            imports = [
+                self.modules.neovim.lsp
+            ];
+
+            settings = { };
         };
     };
 }

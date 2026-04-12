@@ -1,6 +1,5 @@
 { self, inputs, ... }: {
     flake.nixosModules.desktopenv = { pkgs, lib, ... }: {
-	imports = [ self.nixosModules.neovim ];
         programs.hyprland = {
             enable = true;
             withUWSM = true;

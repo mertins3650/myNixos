@@ -1,13 +1,23 @@
 { self, ... }:
 {
+    flake.modules.neovim.plugins = { pkgs, ... }: {
+        specs.plugins = {
+            data = [
+                pkgs.vimPlugins.lz-n
+                pkgs.vimPlugins.plenary-nvim
+                pkgs.vimPlugins.nvim-lspconfig
+                pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+            ];
+        };
+    };
+
     flake.modules.neovim.lua = { pkgs, ... }: {
         extraPackages = [
             pkgs.lua-language-server
         ];
 
-        specs.lua-language-server = {
+        specs.lua = {
             data = [
-                pkgs.vimPlugins.nvim-lspconfig
                 pkgs.vimPlugins.blink-cmp
             ];
             config = ''
@@ -22,9 +32,7 @@
         ];
 
         specs.ts = {
-            data = [
-                pkgs.vimPlugins.nvim-lspconfig
-            ];
+            data = [ ];
             config =
                 # lua
                 ''
@@ -46,9 +54,7 @@
         ];
 
         specs.rust = {
-            data = [
-                pkgs.vimPlugins.nvim-lspconfig
-            ];
+            data = [ ];
             config =
                 # lua
                 ''
@@ -64,9 +70,7 @@
         ];
 
         specs.nix = {
-            data = [
-                pkgs.vimPlugins.nvim-lspconfig
-            ];
+            data = [ ];
             config =
                 # lua
                 ''
@@ -94,9 +98,7 @@
         ];
 
         specs.mdx = {
-            data = [
-                pkgs.vimPlugins.nvim-lspconfig
-            ];
+            data = [ ];
             config =
                 # lua
                 ''
@@ -112,6 +114,7 @@
 
     flake.modules.neovim.lsp = {
         imports = [
+            self.modules.neovim.plugins
             self.modules.neovim.lua
             self.modules.neovim.ts
             self.modules.neovim.rust

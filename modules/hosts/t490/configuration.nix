@@ -10,7 +10,6 @@
 	self.nixosModules.desktopenv
 	self.nixosModules.development
 	self.nixosModules.base
-	self.nixosModules.neovim
     ];
 
         home-manager.users.simonm.imports = [
@@ -22,6 +21,7 @@
             self.homeModules.chromium
             self.homeModules.keyring
             self.homeModules.scripts
+            self.homeModules.neovim
             self.homeModules.terminal
             self.homeModules.theme
             self.homeModules.tmux
