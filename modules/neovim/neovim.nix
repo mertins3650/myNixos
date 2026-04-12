@@ -1,101 +1,66 @@
 {
-  inputs,
-  self,
-  ...
-}: {
-  flake.modules.neovim.main = {
-    config,
-    wlib,
-    lib,
-    pkgs,
+    inputs,
+    self,
     ...
-  }: {
-    options = {
-      dynamicMode = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = ''
-          If true, use impure config instead for fast edits
+}: let
+    mainModule = { pkgs, ... }: {
+        config = {
+            settings.config_directory = ./nvim;
 
-          Both versions of the package may be installed simultaneously
-        '';
-      };
+            extraPackages = [
+                pkgs.ffmpeg-full
+                pkgs.wl-clipboard
+            ];
 
-      initLua = lib.mkOption {
-        type = wlib.types.stringable;
-        default = ./.;
-      };
+            specs.init = {
+                data = null;
+                before = [ "MAIN_INIT" ];
+                config = "require('init')";
+            };
 
-      dynamicInitLua = lib.mkOption {
-        type = lib.types.either wlib.types.stringable lib.types.luaInline;
-        default = lib.generators.mkLuaInline
-          "vim.uv.os_homedir() .. '/nixconf/wrappedPrograms/neovim'";
-      };
+            specs.plugins = {
+                data = [
+                    pkgs.vimPlugins.plenary-nvim
+                    pkgs.vimPlugins.nvim-lspconfig
+                    pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+
+                    pkgs.vimPlugins.nvim-web-devicons
+                    pkgs.vimPlugins.blink-cmp
+
+                    pkgs.vimPlugins.snacks-nvim
+                    pkgs.vimPlugins.oil-nvim
+                    pkgs.vimPlugins.lualine-nvim
+                    pkgs.vimPlugins.luasnip
+                ];
+            };
+
+            specs.lazyPlugins = {
+                lazy = true;
+                data = [
+                    pkgs.vimPlugins.lazydev-nvim
+                    pkgs.vimPlugins.nvim-autopairs
+                    pkgs.vimPlugins.mini-files
+                ];
+            };
+        };
+    };
+in {
+    flake.modules.neovim.main = mainModule;
+
+    flake.nixosModules.neovim = { pkgs, ... }: {
+        programs.neovim = {
+            enable = true;
+            package = self.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
+        };
     };
 
-    config = {
-      settings.config_directory =
-        if config.dynamicMode
-        then config.dynamicInitLua
-        else config.initLua;
-
-      extraPackages = [
-        pkgs.ffmpeg-full
-        pkgs.wl-clipboard
-      ];
-
-      specs.init = {
-        data = null;
-        before = [ "MAIN_INIT" ];
-        config = "require('init')";
-      };
-
-      specs.plugins = {
-        data = [
-          pkgs.vimPlugins.plenary-nvim
-          pkgs.vimPlugins.nvim-lspconfig
-          pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-
-          pkgs.vimPlugins.nvim-web-devicons
-          pkgs.vimPlugins.blink-cmp
-
-          pkgs.vimPlugins.snacks-nvim
-          pkgs.vimPlugins.oil-nvim
-          pkgs.vimPlugins.lualine-nvim
-          pkgs.vimPlugins.luasnip
-        ];
-      };
-
-      specs.lazyPlugins = {
-        lazy = true;
-        data = [
-          pkgs.vimPlugins.lazydev-nvim
-          pkgs.vimPlugins.nvim-autopairs
-          pkgs.vimPlugins.mini-files
-        ];
-      };
+    perSystem = { pkgs, ... }: {
+        packages.neovim = inputs.wrapper-modules.wrappers.neovim.wrap {
+            inherit pkgs;
+            imports = [
+                mainModule
+                self.modules.neovim.allServers
+            ];
+        };
     };
-  };
-
-  flake.nixosModules.neovim = { pkgs, ... }: {
-    programs.neovim = {
-      enable = true;
-      package = self.packages.${pkgs.system}.neovimFull;
-    };
-  };
-
-  perSystem = {
-    pkgs,
-    self',
-    ...
-  }: {
-    packages.neovimFull = inputs.wrapper-modules.wrappers.neovim.wrap {
-      inherit pkgs;
-      dynamicMode = true;
-      imports = [
-        self.modules.neovim.main
-        self.modules.neovim.allServers
-      ];
-    };
-  };
 }
