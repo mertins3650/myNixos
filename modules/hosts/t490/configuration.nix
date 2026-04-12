@@ -10,7 +10,6 @@
 	self.nixosModules.desktopenv
 	self.nixosModules.development
 	self.nixosModules.base
-	self.nixosModules.neovim
     ];
 
         home-manager.users.simonm.imports = [
