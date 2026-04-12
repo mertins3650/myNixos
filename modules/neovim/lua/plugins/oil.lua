@@ -1,5 +1,6 @@
 return {
 	"oil-nvim",
+	cmd = "Oil",
 	after = function()
 		function _G.get_oil_winbar()
 			local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
@@ -12,11 +13,11 @@ return {
 		end
 
 		require("oil").setup({
-			default_file_explorer = true,
-			view_options = { show_hidden = true },
 			win_options = {
 				winbar = "%!v:lua.get_oil_winbar()",
 			},
+			view_options = { show_hidden = true },
+			default_file_explorer = true,
 		})
 	end,
 	keys = {
