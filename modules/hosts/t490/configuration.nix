@@ -1,6 +1,5 @@
 { self, inputs, ... }: {
-
-  flake.nixosModules.t490Configuration = { pkgs, lib, ... }: {
+  flake.nixosModules.t490Configuration = { ... }: {
   imports =
     [ 
         inputs.home-manager.nixosModules.home-manager
@@ -21,7 +20,6 @@
             self.homeModules.chromium
             self.homeModules.keyring
             self.homeModules.scripts
-            self.homeModules.neovim
             self.homeModules.terminal
             self.homeModules.theme
             self.homeModules.tmux
