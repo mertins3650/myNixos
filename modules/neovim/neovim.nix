@@ -19,7 +19,9 @@
             };
 
             specs.general = with pkgs.vimPlugins; [
+	    conform-nvim
 	    	rose-pine
+		colorful-menu-nvim
                 nvim-lspconfig
                 nvim-treesitter.withAllGrammars
                 lz-n
@@ -47,6 +49,12 @@
                 rust-analyzer
                 nixd
                 alejandra
+ 
+		# formatters
+		prettier
+		stylua
+		go
+		rustfmt
             ];
 
             settings.config_directory = ./.;
