@@ -33,7 +33,6 @@ xdg.portal = {
 };
         environment.systemPackages = with pkgs; [
             wl-clipboard
-	    thunar
 	nautilus
             glib
             swaybg
