@@ -21,7 +21,6 @@
                 gnugrep
                 coreutils
                 procps
-                neovim
             ];
         };
 }

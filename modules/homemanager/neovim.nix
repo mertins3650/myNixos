@@ -8,6 +8,7 @@
             vimAlias = true;
 
             extraPackages = [
+	    	pkgs.tree-sitter
                 pkgs.lua-language-server
                 pkgs.typescript-language-server
                 pkgs.rust-analyzer
