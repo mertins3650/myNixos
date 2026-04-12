@@ -13,8 +13,8 @@ return {
 		end
 
 		require("oil").setup({
-			view_options = { show_hidden = true },
 			default_file_explorer = true,
+			view_options = { show_hidden = true },
 			win_options = {
 				winbar = "%!v:lua.get_oil_winbar()",
 			},
