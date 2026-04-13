@@ -23,6 +23,7 @@
       };
 
       specs.general = with pkgs.vimPlugins; [
+        harpoon2
         mini-icons
         snacks-nvim
         mini-ai
