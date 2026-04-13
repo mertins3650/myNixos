@@ -10,11 +10,7 @@
     };
   };
 
-  perSystem = {
-    pkgs,
-    lib,
-    ...
-  }: {
+  perSystem = {pkgs, ...}: {
     packages.myNeovim = inputs.wrapper-modules.wrappers.neovim.wrap {
       inherit pkgs;
 
@@ -30,7 +26,6 @@
         conform-nvim
         rose-pine
         colorful-menu-nvim
-        nvim-lspconfig
         nvim-treesitter.withAllGrammars
         lz-n
         oil-nvim
