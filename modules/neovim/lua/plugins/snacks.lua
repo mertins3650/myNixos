@@ -1,9 +1,10 @@
 return {
 	"snacks.nvim",
 	after = function()
-		require("snacks.nvim").setup({
+		require("snacks").setup({
 			opts = {
 				picker = {
+					enabled = true,
 					layout = "telescope",
 				},
 			},
