@@ -23,6 +23,9 @@
       };
 
       specs.general = with pkgs.vimPlugins; [
+        mini-ai
+        mini-surround
+        mini-statusline
         luasnip
         conform-nvim
         rose-pine
