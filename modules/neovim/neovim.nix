@@ -24,6 +24,7 @@
 
       specs.general = with pkgs.vimPlugins; [
         mini-icons
+        mini-pick
         mini-ai
         mini-surround
         mini-statusline
