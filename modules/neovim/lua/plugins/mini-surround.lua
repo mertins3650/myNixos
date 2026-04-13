@@ -1,1 +1,1 @@
-return { "mini-surround" }
+return { "mini.surround" }

@@ -23,6 +23,7 @@
       };
 
       specs.general = with pkgs.vimPlugins; [
+        mini-icons
         mini-ai
         mini-surround
         mini-statusline
