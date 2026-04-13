@@ -23,15 +23,13 @@
       };
 
       specs.general = with pkgs.vimPlugins; [
+        luasnip
         conform-nvim
         rose-pine
-        colorful-menu-nvim
         nvim-treesitter.withAllGrammars
         lz-n
         oil-nvim
-        lspkind-nvim
         blink-cmp
-        nvim-web-devicons
       ];
       specs.lazy = {
         lazy = true;
