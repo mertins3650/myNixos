@@ -1,6 +1,1 @@
-return {
-	"hoppe.nvim",
-	setup = function()
-		require("hoppe.nvim").setup({})
-	end,
-}
+require("hoppe.nvim").setup({})
