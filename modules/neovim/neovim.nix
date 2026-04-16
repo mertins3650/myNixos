@@ -37,11 +37,19 @@
         oil-nvim
         blink-cmp
         (pkgs.vimUtils.buildVimPlugin {
+          name = "miniharp.nvim";
+          src = pkgs.fetchgit {
+            url = "https://github.com/vieitesss/miniharp.nvim";
+            rev = "29c50dd622e98e2fc5e12f71fba29e3fc34f1425";
+            sha256 = "0000000000000000000000000000000000000000000000000000";
+          };
+        })
+        (pkgs.vimUtils.buildVimPlugin {
           name = "hoppe.nvim";
           src = pkgs.fetchgit {
             url = "https://github.com/mertins3650/hoppe.nvim.git";
             rev = "168d66abf63335cfaa677553cc478dd2ee7b1849";
-            sha256 = "FLRuNU6/rlggRMYMifu1cqn/G9WKcatRxC/oFVSkvNY=";
+            sha256 = "0000000000000000000000000000000000000000000000000000";
           };
         })
       ];
