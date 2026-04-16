@@ -40,7 +40,7 @@
           name = "hoppe.nvim";
           src = fetchGit {
             url = "https://github.com/mertins3650/hoppe.nvim.git";
-            rev = "main";
+            ref = "refs/heads/main";
           };
         })
       ];
