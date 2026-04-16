@@ -1,7 +1,0 @@
-if [[ "$(pwd)" == $HOME/Work ]]; then
-    clear
-    return
-fi
-tmux new-window -dn scratch
-nvim .
-clear
