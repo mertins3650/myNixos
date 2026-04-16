@@ -9,7 +9,7 @@
 	self.nixosModules.desktopenv
 	self.nixosModules.development
 	self.nixosModules.base
-	self.nixosModules.amdGpuPower
+#	self.nixosModules.amdGpuPower
 	self.nixosModules.neovim
     ];
 
@@ -38,7 +38,6 @@
 	services.xserver.videoDrivers = [ "amdgpu" ];
 	hardware.cpu.amd.updateMicrocode = true;
   networking.hostName = "t14"; # Define your hostname.
-services.thermald.enable = true;
 
 
     
