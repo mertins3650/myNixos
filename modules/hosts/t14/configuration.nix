@@ -9,7 +9,7 @@
 	self.nixosModules.desktopenv
 	self.nixosModules.development
 	self.nixosModules.base
-	self.nixosModules.madGpuPower
+	self.nixosModules.amdGpuPower
 	self.nixosModules.neovim
     ];
 
