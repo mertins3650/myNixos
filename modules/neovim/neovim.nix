@@ -38,7 +38,10 @@
         blink-cmp
         (pkgs.vimUtils.buildVimPlugin {
           name = "hoppe.nvim";
-          src = ./hoppe.nvim;
+          src = fetchGit {
+            url = "https://github.com/mertins3650/hoppe.nvim.git";
+            rev = "main";
+          };
         })
       ];
       specs.lazy = {
