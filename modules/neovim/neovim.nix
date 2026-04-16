@@ -36,6 +36,10 @@
         lz-n
         oil-nvim
         blink-cmp
+        (pkgs.vimUtils.buildVimPlugin {
+          name = "hoppe.nvim";
+          src = ./hoppe.nvim;
+        })
       ];
       specs.lazy = {
         lazy = true;
