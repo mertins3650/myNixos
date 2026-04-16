@@ -1,4 +1,5 @@
 require("keymaps")
+require("hoppe")
 require("opts")
 require("set")
 require("lz.n").load("plugins")

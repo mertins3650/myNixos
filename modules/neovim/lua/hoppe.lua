@@ -1,6 +1,6 @@
 return {
 	{
-		dir = "~/myNixos/hoppe.nvim/",
+		dir = "~/Work/hoppe.nvim/",
 		config = function()
 			require("hoppe")
 		end,
