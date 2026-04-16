@@ -36,6 +36,14 @@
         lz-n
         oil-nvim
         blink-cmp
+        (pkgs.vimUtils.buildVimPlugin {
+          name = "miniharp.nvim";
+          src = pkgs.fetchgit {
+            url = "https://github.com/vieitesss/miniharp.nvim";
+            rev = "29c50dd622e98e2fc5e12f71fba29e3fc34f1425";
+            sha256 = "0000000000000000000000000000000000000000000000000000";
+          };
+        })
       ];
       specs.lazy = {
         lazy = true;
