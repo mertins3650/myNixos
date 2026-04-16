@@ -1,3 +1,4 @@
+vim.opt.runtimepath:prepend(vim.fn.expand("~/Work/hoppe.nvim/"))
 local augroup = vim.api.nvim_create_augroup
 local MertinsGroup = augroup("Mertins", {})
 
