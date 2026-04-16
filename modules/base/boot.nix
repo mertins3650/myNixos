@@ -1,13 +1,5 @@
-{
-  self,
-  input,
-  ...
-}: {
-  flake.nixosModules.base = {
-    pkgs,
-    lib,
-    ...
-  }: let
+{...}: {
+  flake.nixosModules.base = {pkgs, ...}: let
     archPlymouthTheme = pkgs.stdenvNoCC.mkDerivation {
       pname = "arch-plymouth-theme";
       version = "1.0";
@@ -51,7 +43,7 @@
 
       loader = {
         timeout = 3;
-        systemd-boot.enalbe = true;
+        systemd-boot.enable = true;
 
         efi.canTouchEfiVariables = true;
       };
