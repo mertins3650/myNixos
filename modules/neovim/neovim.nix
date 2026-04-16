@@ -38,10 +38,10 @@
         blink-cmp
         (pkgs.vimUtils.buildVimPlugin {
           name = "hoppe.nvim";
-          src = fetchgit {
+          src = pkgs.fetchgit {
             url = "https://github.com/mertins3650/hoppe.nvim.git";
-            rev = "168d66abf63335cfaa677553cc478dd2ee7b1849";
-            sha256 = "0000000000000000000000000000000000000000000000000000";
+            rev = "168d66abf63335cfaa677553cc478dd2ee7b1849"; # pinned commit
+            sha256 = "sha256-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
           };
         })
       ];
