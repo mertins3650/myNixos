@@ -1,6 +1,6 @@
 return {
 	"hoppe.nvim",
-	after = function()
+	setup = function()
 		require("hoppe.nvim").setup({})
 	end,
 }
