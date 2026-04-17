@@ -43,6 +43,7 @@
             rev = "29c50dd622e98e2fc5e12f71fba29e3fc34f1425";
             sha256 = "rQy60Byv5f7PrSZEWYNihZiDJPLIU6NuXZBi6UGKJIM=";
           };
+          isOptional = false;
         })
       ];
       specs.lazy = {
