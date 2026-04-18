@@ -40,8 +40,8 @@
           name = "hoppe.nvim";
           src = pkgs.fetchgit {
             url = "https://github.com/mertins3650/hoppe.nvim";
-            rev = "168d66abf63335cfaa677553cc478dd2ee7b1849";
-            sha256 = "sha256-FLRuNU6/rlggRMYMifu1cqn/G9WKcatRxC/oFVSkvNY=";
+            rev = "f9119ffd9cec289b73fd157d53489a73f34404c2";
+            sha256 = "sha256-fR3AXLCuwFSV0frhVIWbmcW2F4fsKaxnhjVOl8CINa8=";
           };
         })
       ];
