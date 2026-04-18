@@ -36,12 +36,12 @@
       self.homeModules.homepackages
     ];
 
-    boot.initrd.luks.devices."luks-d9bb10f0-216f-4784-b8a1-f52c0f323447".device = "/dev/disk/by-uuid/d9bb10f0-216f-4784-b8a1-f52c0f323447";
+  boot.initrd.luks.devices."luks-3a74659a-7177-4e58-a91f-eac7dcc30bb5".device = "/dev/disk/by-uuid/3a74659a-7177-4e58-a91f-eac7dcc30bb5";
 
-    boot.initrd.kernelModules = ["amdgpu"];
-    services.xserver.videoDrivers = ["amdgpu"];
-    hardware.cpu.amd.updateMicrocode = true;
+services.thermald.enable = true;
+	boot.initrd.kernelModules = [ "i915" ];
     networking.hostName = "t14"; # Define your hostname.
+hardware.cpu.intel.updateMicrocode = true;
 
     system.stateVersion = "25.11"; # Did you read the comment?
   };

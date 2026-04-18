@@ -129,6 +129,7 @@
       curl
       wget
       fd
+      jq
     ];
   };
 }
