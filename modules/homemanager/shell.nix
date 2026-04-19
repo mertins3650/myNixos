@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   flake.homeModules.shell = {pkgs, ...}: {
     programs.zsh = {
       enable = true;
@@ -121,6 +121,7 @@
     home.packages = with pkgs; [
       eza
       bat
+      lazygit
       fzf
       btop
       zoxide

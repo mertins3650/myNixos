@@ -26,6 +26,7 @@
         harpoon2
         mini-icons
         snacks-nvim
+        lazygit-nvim
         mini-ai
         mini-surround
         mini-statusline
@@ -36,20 +37,15 @@
         lz-n
         oil-nvim
         blink-cmp
-        (pkgs.vimUtils.buildVimPlugin {
-          name = "hoppe.nvim";
-          src = pkgs.fetchgit {
-            url = "https://github.com/mertins3650/hoppe.nvim";
-            rev = "f9119ffd9cec289b73fd157d53489a73f34404c2";
-            sha256 = "sha256-fR3AXLCuwFSV0frhVIWbmcW2F4fsKaxnhjVOl8CINa8=";
-          };
-        })
       ];
       specs.lazy = {
         lazy = true;
         data = with pkgs.vimPlugins; [
           lazydev-nvim
         ];
+      };
+      specs.hoppe = {
+        data = "/home/simonm/Work/hoppe.nvim/";
       };
 
       info = {
