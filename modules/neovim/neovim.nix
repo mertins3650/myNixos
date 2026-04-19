@@ -26,7 +26,6 @@
         vim-fugitive
         mini-icons
         snacks-nvim
-        lazygit-nvim
         mini-ai
         mini-surround
         mini-statusline

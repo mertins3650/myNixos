@@ -121,7 +121,6 @@
     home.packages = with pkgs; [
       eza
       bat
-      lazygit
       fzf
       btop
       zoxide
