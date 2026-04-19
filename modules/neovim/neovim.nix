@@ -23,7 +23,7 @@
       };
 
       specs.general = with pkgs.vimPlugins; [
-        harpoon2
+        vim-fugitive
         mini-icons
         snacks-nvim
         lazygit-nvim
