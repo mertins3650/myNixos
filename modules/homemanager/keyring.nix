@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
-    flake.homeModules.keyring = { pkgs, ... }: {
-services.gnome-keyring.enable = true;
-home.packages = [ pkgs.gcr ]; # Provides org.gnome.keyring.SystemPrompter
-};
+{...}: {
+  flake.homeModules.keyring = {pkgs, ...}: {
+    services.gnome-keyring.enable = true;
+    home.packages = [pkgs.gcr]; # Provides org.gnome.keyring.SystemPrompter
+  };
 }

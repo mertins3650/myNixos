@@ -34,7 +34,6 @@
         rose-pine
         nvim-treesitter.withAllGrammars
         lz-n
-        oil-nvim
         blink-cmp
       ];
       specs.lazy = {
