@@ -1,8 +1,12 @@
 require("keymaps")
 require("opts")
 require("set")
+-- Lazy plugins
 require("lz.n").load("plugins")
-require("hoppe")
+-- Plugins
+require("oil")
+require("snacks")
+-- LSP
 vim.lsp.enable({
 	-- lua
 	"luals",

@@ -1,6 +1,4 @@
-return {
-	"snacks.nvim",
-	after = function()
+
 		require("snacks").setup({
 			picker = {
 				enabled = true,
