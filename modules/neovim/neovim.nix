@@ -24,6 +24,7 @@
 
       specs.general = with pkgs.vimPlugins; [
         vim-fugitive
+        oil-nvim
         mini-icons
         snacks-nvim
         mini-ai
