@@ -64,10 +64,36 @@
     services.gnome.gnome-keyring.enable = true;
     security.pam.services.sddm.enableGnomeKeyring = true;
     systemd.services.display-manager.serviceConfig.KeyringMode = "inherit";
+    security.pam.services.sddm-autologin.rules.auth.systemd_loadkey = {
+      order = 0;
+      control = "optional";
+      modulePath = "${pkgs.systemd}/lib/security/pam_systemd_loadkey.so";
+    };
 
-    security.pam.services.sddm-autologin.text = pkgs.lib.mkBefore ''
-      auth optional ${pkgs.systemd}/lib/security/pam_systemd_loadkey.so
-      auth include sddm
-    '';
+    security.pam.services.sddm-autologin.rules.auth.gnome_keyring = {
+      order = 10400;
+      control = "optional";
+      modulePath = "${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so";
+    };
+
+    security.pam.services.sddm-autologin.rules.session.gnome_keyring = {
+      order = 10400;
+      control = "optional";
+      modulePath = "${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so";
+      settings.auto_start = true;
+    };
+    # security.pam.services.sddm-autologin = {
+    #   enableGnomeKeyring = true;
+    #
+    #   rules.auth.systemd_loadkey = {
+    #     order = 0;
+    #     control = "optional";
+    #     modulePath = "${pkgs.systemd}/lib/security/pam_systemd_loadkey.so";
+    #   };
+    # };
+    # security.pam.services.sddm-autologin.text = pkgs.lib.mkBefore ''
+    #   auth optional ${pkgs.systemd}/lib/security/pam_systemd_loadkey.so
+    #   auth include sddm
+    # '';
   };
 }
