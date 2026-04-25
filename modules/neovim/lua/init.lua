@@ -4,8 +4,8 @@ require("set")
 -- Lazy plugins
 require("lz.n").load("plugins")
 -- Plugins
-require("oil")
-require("snacks")
+require("p-oil")
+require("p-snacks")
 -- LSP
 vim.lsp.enable({
 	-- lua
