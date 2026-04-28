@@ -36,8 +36,7 @@
       self.homeModules.git
       self.homeModules.homepackages
     ];
-
-    boot.initrd.luks.devices."luks-3a74659a-7177-4e58-a91f-eac7dcc30bb5".device = "/dev/disk/by-uuid/3a74659a-7177-4e58-a91f-eac7dcc30bb5";
+  boot.initrd.luks.devices."luks-36de1782-d627-41c9-8c32-902f06423faa".device = "/dev/disk/by-uuid/36de1782-d627-41c9-8c32-902f06423faa";
 
     services.thermald.enable = true;
     boot.initrd.kernelModules = ["i915"];
