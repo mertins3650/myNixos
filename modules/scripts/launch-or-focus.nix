@@ -1,34 +1,31 @@
-{ ... }:
-{
-    flake.homeModules.scripts =
-        { config, pkgs, ... }:
-        {
-            home.packages = [
-                (pkgs.writeShellApplication {
-                    name = "launch-or-focus";
-                    runtimeInputs = with pkgs; [
-                        coreutils
-                        hyprland
-                        jq
-                        util-linux
-                        uwsm
-                    ];
+{...}: {
+  flake.homeModules.scripts = {pkgs, ...}: {
+    home.packages = [
+      (pkgs.writeShellApplication {
+        name = "launch-or-focus";
+        runtimeInputs = with pkgs; [
+          coreutils
+          hyprland
+          jq
+          util-linux
+          uwsm
+        ];
 
-                    text = ''
-                        WINDOW_PATTERN="$1"
-                        LAUNCH_COMMAND="''${2:-"uwsm app -- $WINDOW_PATTERN"}"
+        text = ''
+          WINDOW_PATTERN="$1"
+          LAUNCH_COMMAND="''${2:-"uwsm app -- $WINDOW_PATTERN"}"
 
-                        WINDOW_ADDRESS=$(hyprctl clients -j | jq -r --arg p "$WINDOW_PATTERN" \
-                            '.[] | select((.class | test("\\b" + $p + "\\b"; "i")) or (.title | test("\\b" + $p + "\\b"; "i"))) | .address' \
-                            | head -n1)
+          WINDOW_ADDRESS=$(hyprctl clients -j | jq -r --arg p "$WINDOW_PATTERN" \
+              '.[] | select((.class | test("\\b" + $p + "\\b"; "i")) or (.title | test("\\b" + $p + "\\b"; "i"))) | .address' \
+              | head -n1)
 
-                        if [[ -n "$WINDOW_ADDRESS" ]]; then
-                            hyprctl dispatch focuswindow "address:$WINDOW_ADDRESS"
-                        else
-                            eval exec setsid "$LAUNCH_COMMAND"
-                        fi
-                    '';
-                })
-            ];
-        };
+          if [[ -n "$WINDOW_ADDRESS" ]]; then
+              hyprctl dispatch focuswindow "address:$WINDOW_ADDRESS"
+          else
+              eval exec setsid "$LAUNCH_COMMAND"
+          fi
+        '';
+      })
+    ];
+  };
 }
