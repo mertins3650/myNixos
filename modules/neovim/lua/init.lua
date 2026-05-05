@@ -14,4 +14,6 @@ vim.lsp.enable({
 	"nixld",
 	-- go
 	"gopls",
+	-- rust
+	"rust_analyser",
 })
