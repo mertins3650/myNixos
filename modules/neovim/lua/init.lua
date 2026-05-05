@@ -12,4 +12,6 @@ vim.lsp.enable({
 	"luals",
 	-- nix
 	"nixld",
+	-- go
+	"gopls",
 })
