@@ -29,7 +29,7 @@
 
           echo "WARNING: This will completely erase all data on $device and label it '$label'."
           printf "Are you sure you want to continue? (y/N): "
-          read confirm
+          read -r confirm
 
           case "$confirm" in
               [Yy]*)
