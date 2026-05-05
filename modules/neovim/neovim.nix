@@ -57,6 +57,7 @@
         astro-language-server
         typescript-language-server
         rust-analyzer
+        gopls
         nixd
         alejandra
 
