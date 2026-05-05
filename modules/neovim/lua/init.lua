@@ -15,5 +15,5 @@ vim.lsp.enable({
 	-- go
 	"gopls",
 	-- rust
-	"rust_analyser",
+	"rust_analyzer",
 })
