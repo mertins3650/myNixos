@@ -10,7 +10,7 @@
 
     wayland.windowManager.hyprland = {
       enable = true;
-      configType = "lua";
+      configType = "hyprlang";
       systemd.enable = false;
       systemd.variables = ["--all"];
 
@@ -80,7 +80,7 @@
             "$mainMod SHIFT, U, exec, floating-terminal sync-sys"
             "$mainMod, T, togglefloating,"
             "$mainMod, P, pseudo,"
-            "$mainMod, V, togglesplit,"
+            # "$mainMod, V, togglesplit,"
             "$mainMod, F, fullscreen, 0"
             "$mainMod, h, movefocus, l"
             "$mainMod, l, movefocus, r"
@@ -254,7 +254,6 @@
         };
 
         dwindle = {
-          pseudotile = true;
           preserve_split = true;
           force_split = 2;
         };
@@ -273,68 +272,6 @@
           on_focus_under_fullscreen = 1;
         };
       };
-
-      extraConfig = ''
-        hyprland.windowrulev2({
-            name = "no-gaps-wtv1",
-
-            match = {
-                floating = false,
-                workspace = "w[tv1]",
-            },
-
-            border_size = 0,
-            rounding = 0,
-        })
-
-        hyprland.windowrulev2({
-            name = "no-gaps-f1",
-
-            match = {
-                floating = false,
-                workspace = "f[1]",
-            },
-
-            border_size = 0,
-            rounding = 0,
-        })
-
-        hyprland.windowrulev2({
-            name = "suppress-maximize-events",
-
-            match = {
-                class = ".*",
-            },
-
-            suppress_event = "maximize",
-        })
-
-        hyprland.windowrulev2({
-            name = "fix-xwayland-drags",
-
-            match = {
-                class = "^$",
-                title = "^$",
-                xwayland = true,
-                floating = true,
-                fullscreen = false,
-                pinned = false,
-            },
-
-            no_focus = true,
-        })
-
-        hyprland.windowrulev2({
-            name = "move-hyprland-run",
-
-            match = {
-                class = "hyprland-run",
-            },
-
-            move = "20 monitor_h-120",
-            floating = true,
-        })
-      '';
     };
 
     home.sessionVariables = {
