@@ -150,12 +150,6 @@
           "dbus-update-activation-environment --systemd --all"
         ];
 
-        monitor = [
-          ",preferred,auto,1.25"
-          "DP-2,2560x1440@144,0x0,1"
-          "eDP-1,preferred,auto,1.25"
-        ];
-
         bindl = with dsp; [
           (bind "switch:on:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, disable'"))
           (bind "switch:off:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, preferred, auto, 1.25'"))
@@ -194,27 +188,6 @@
           (bind "SUPER, mouse:272" drag)
         ];
 
-        workspace = [
-          "w[tv1], gapsout:0, gapsin:0"
-          "f[1], gapsout:0, gapsin:0"
-        ];
-
-        windowrule = [
-          "opacity 1 0.95, match:class .*"
-          "float on, match:tag floating-window"
-          "center on, match:tag floating-window"
-          "size 875 600, match:tag floating-window"
-          "tag +floating-window, match:class (org.nixy.bluetui|org.nixy.impala|org.nixy.wiremix|org.nixy.btop|org.nixy.terminal|org.nixy.bash|org.gnome.NautilusPreviewer|org.gnome.Evince|com.gabm.satty|nixy|About|TUI.float|imv|mpv)"
-          "tag +floating-window, match:class (xdg-desktop-portal-gtk|sublime_text|DesktopEditors|org.gnome.Nautilus), match:title ^(Open.*Files?|Open [F|f]older.*|Save.*Files?|Save.*As|Save|All Files|.*wants to [open|save].*|[C|c]hoose.*)"
-          "float on, match:class org.gnome.Calculator"
-          "float on, match:class steam"
-          "center on, match:class steam, match:title Steam"
-          "opacity 1 1, match:class steam"
-          "size 1100 700, match:class steam, match:title Steam"
-          "size 460 800, match:class steam, match:title Friends List"
-          "idle_inhibit fullscreen, match:class steam"
-        ];
-
         input = {
           kb_layout = "dk";
           kb_variant = "";
@@ -246,8 +219,10 @@
           gaps_in = 5;
           gaps_out = 10;
           border_size = 2;
-          "col.active_border" = "rgb(ebbcba) rgb(31748f) rgb(eb6f92) rgb(c4a7e7) 90deg";
-          "col.inactive_border" = "rgba(595959aa)";
+          col = {
+            active_border = "rgb(ebbcba) rgb(31748f) rgb(eb6f92) rgb(c4a7e7) 90deg";
+            inactive_border = "rgba(595959aa)";
+          };
           resize_on_border = false;
           allow_tearing = false;
           layout = "dwindle";
@@ -322,68 +297,6 @@
           on_focus_under_fullscreen = 1;
         };
       };
-
-      extraConfig = ''
-        hyprland.windowrulev2({
-            name = "no-gaps-wtv1",
-
-            match = {
-                floating = false,
-                workspace = "w[tv1]",
-            },
-
-            border_size = 0,
-            rounding = 0,
-        })
-
-        hyprland.windowrulev2({
-            name = "no-gaps-f1",
-
-            match = {
-                floating = false,
-                workspace = "f[1]",
-            },
-
-            border_size = 0,
-            rounding = 0,
-        })
-
-        hyprland.windowrulev2({
-            name = "suppress-maximize-events",
-
-            match = {
-                class = ".*",
-            },
-
-            suppress_event = "maximize",
-        })
-
-        hyprland.windowrulev2({
-            name = "fix-xwayland-drags",
-
-            match = {
-                class = "^$",
-                title = "^$",
-                xwayland = true,
-                floating = true,
-                fullscreen = false,
-                pinned = false,
-            },
-
-            no_focus = true,
-        })
-
-        hyprland.windowrulev2({
-            name = "move-hyprland-run",
-
-            match = {
-                class = "hyprland-run",
-            },
-
-            move = "20 monitor_h-120",
-            floating = true,
-        })
-      '';
     };
 
     home.sessionVariables = {
