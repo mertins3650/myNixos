@@ -54,14 +54,6 @@
       systemd.variables = ["--all"];
 
       settings = {
-        "$mod" = "SUPER";
-        "$mainMod" = "SUPER";
-        "$terminal" = "uwsm app -- $TERMINAL";
-        "$browser" = "launch-browser";
-        "$fileManager" = "nautilus";
-        "$menu" = "uwsm app -- rofi -show drun";
-        "$osdclient" = ''swayosd-client --monitor "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')"'';
-
         config = {
           monitor = [
             {

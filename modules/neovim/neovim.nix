@@ -52,7 +52,7 @@
         which = "will be placed in the generated info plugin for access";
       };
 
-      extraPackages = with pkgs; [
+      runtimePkgs = with pkgs; [
         lua-language-server
         astro-language-server
         typescript-language-server
