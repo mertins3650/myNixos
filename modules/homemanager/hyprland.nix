@@ -2,8 +2,47 @@
   flake.homeModules.hyprland = {
     config,
     pkgs,
+    lib,
     ...
-  }: {
+  }: let
+    lua = lib.generators.mkLuaInline;
+    dsp = {
+      exec = cmd: lua ''hl.dsp.exec_cmd("${cmd}")'';
+      close = lua "hl.dsp.window.close()";
+      exit = lua "hl.dsp.exit()";
+      float = lua ''hl.dsp.window.float({ action = "toggle" })'';
+      fullscreen = lua "hl.dsp.window.fullscreen()";
+      pseudo = lua "hl.dsp.window.pseudo()";
+      layout = msg: lua ''hl.dsp.layout("${msg}")'';
+      focus = dir: lua ''hl.dsp.focus({ direction = "${dir}" })'';
+      swap = dir: lua ''hl.dsp.window.swap({ direction = "${dir}" })'';
+      toggleSpecial = name: lua ''hl.dsp.workspace.toggle_special("${name}")'';
+      moveToSpecial = name: lua ''hl.dsp.window.move({ workspace = "special:${name}" })'';
+      focusWorkspace = ws: lua ''hl.dsp.focus({ workspace = "${toString ws}" })'';
+      moveToWorkspace = ws: lua ''hl.dsp.window.move({ workspace = "${toString ws}" })'';
+      drag = lua "hl.dsp.window.drag()";
+      resize = lua "hl.dsp.window.resize()";
+      sendshortcut = mod: key: lua ''hl.dsp.send_shortcut({ mods = "${mod}", key = "${key}" })'';
+    };
+
+    bind = keys: dispatcher: {_args = [keys dispatcher];};
+    bindOpts = keys: dispatcher: opts: {_args = [keys dispatcher opts];};
+
+    workspaceBinds = lib.concatMap (
+      i: let
+        key = toString (lib.mod i 10);
+      in [
+        (bind "SUPER + ${key}" (dsp.focusWorkspace i))
+        (bind "SUPER + SHIFT + ${key}" (dsp.moveToWorkspace i))
+      ]
+    ) (lib.range 1 10);
+    mkEnv = name: value: {
+      _args = [
+        name
+        value
+      ];
+    };
+  in {
     home.packages = with pkgs; [
       xdg-desktop-portal-gtk
     ];
@@ -23,6 +62,92 @@
         "$menu" = "uwsm app -- rofi -show drun";
         "$osdclient" = ''swayosd-client --monitor "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')"'';
 
+        config = {
+          monitor = [
+            {
+              output = "DP-";
+              mode = "2560x1440@144";
+              position = "0x0";
+              scale = 1;
+            }
+          ];
+
+          env = [
+            (mkEnv "HYPRCURSOR_SIZE" "24")
+            (mkEnv "XCURSOR_THEME" "Adwaita")
+            (mkEnv "XCURSOR_SIZE" "24")
+            (mkEnv "GDK_BACKEND" "wayland,x11,*")
+            (mkEnv "QT_QPA_PLATFORM" "wayland;xcb")
+            (mkEnv "QT_STYLE_OVERRIDE" "kvantum")
+            (mkEnv "SDL_VIDEODRIVER" "wayland")
+            (mkEnv "MOZ_ENABLE_WAYLAND" "1")
+            (mkEnv "ELECTRON_OZONE_PLATFORM_HINT" "wayland")
+            (mkEnv "OZONE_PLATFORM" "wayland")
+            (mkEnv "XDG_SESSION_TYPE" "wayland")
+            (mkEnv "XDG_CURRENT_DESKTOP" "Hyprland")
+            (mkEnv "XDG_SESSION_DESKTOP" "Hyprland")
+            (mkEnv "GDK_SCALE" "1")
+          ];
+        };
+        bind = with dsp; [
+          (bind "SUPER + RETURN" (exec "uwsm app -- $TERMINAL"))
+          (bind "SUPER + Q" close)
+          (bind "SUPER + D" (exec "uwsm app -- rofi -show drun"))
+          (bind "SUPER + O" (exec "ghostty"))
+
+          (bind "SUPER + CTRL + F" (exec "uwsm app -- nautilus --new-window"))
+          (bind "SUPER + SHIFT + F" (exec "uwsm app -- $TERMINAL -e yazi"))
+
+          (bind "SUPER + R" (exec "uwsm app -- rofi -show drun"))
+
+          (bind "SUPER + SHIFT + B" (exec "launch-browser"))
+          (bind "SUPER + SHIFT + ALT + B" (exec "launch-browser --private"))
+
+          (bind "SUPER + SHIFT + A" (exec "launch-webapp http://chatgpt.com"))
+          (bind "SUPER + SHIFT + Y" (exec "launch-webapp https://youtube.com/"))
+          (bind "SUPER + SHIFT + C" (exec "launch-webapp https://calendar.proton.me/"))
+          (bind "SUPER + SHIFT + E" (exec "launch-webapp https://mail.proton.me/"))
+          (bind "SUPER + CTRL + N" (exec "launch-webapp https://netflix.com/"))
+          (bind "SUPER + SHIFT + T" (exec "launch-webapp https://twitch.tv/"))
+          (bind "SUPER + SHIFT + R" (exec "launch-webapp https://reddit.com/"))
+          (bind "SUPER + CTRL + J" (exec "launch-webapp http://jellyfin.mertins.net"))
+          (bind "SUPER + SHIFT + N" (exec "launch-webapp http://joplin.mertins.net"))
+
+          (bind "SUPER + ALT + T" (exec "floating-terminal theme-switcher"))
+          (bind "SUPER + SHIFT + U" (exec "floating-terminal sync-sys"))
+
+          # Window controls
+          (bind "SUPER + T" float)
+          (bind "SUPER + P" pseudo)
+          (bind "SUPER + V" (layout "togglesplit"))
+          (bind "SUPER + F" fullscreen)
+
+          # Focus
+          (bind "SUPER + H" (focus "l"))
+          (bind "SUPER + L" (focus "r"))
+          (bind "SUPER + K" (focus "u"))
+          (bind "SUPER + J" (focus "d"))
+
+          # Move windows
+          (bind "SUPER + SHIFT + H" (swap "l"))
+          (bind "SUPER + SHIFT + L" (swap "r"))
+          (bind "SUPER + SHIFT + K" (swap "u"))
+          (bind "SUPER + SHIFT + J" (swap "d"))
+
+          # Resize (still raw dispatcher-style call)
+          (bind "SUPER + ALT + L" (exec "hyprctl dispatch resizeactive 10 0"))
+          (bind "SUPER + ALT + H" (exec "hyprctl dispatch resizeactive -10 0"))
+          (bind "SUPER + ALT + K" (exec "hyprctl dispatch resizeactive 0 -10"))
+          (bind "SUPER + ALT + J" (exec "hyprctl dispatch resizeactive 0 10"))
+
+          # Workspaces
+          (bind "SUPER + 0" (focusWorkspace 10))
+          (bind "SUPER + SHIFT + 0" (moveToWorkspace 10))
+
+          # Lock
+          (bind "SUPER + CTRL + ALT + L" (exec "pidof hyprlock || hyprlock &"))
+        ];
+
         exec-once = [
           "uwsm app -- hypridle"
           "uwsm app -- mako"
@@ -33,116 +158,48 @@
           "dbus-update-activation-environment --systemd --all"
         ];
 
-        env = [
-          "HYPRCURSOR_SIZE,24"
-          "XCURSOR_THEME,Adwaita"
-          "XCURSOR_SIZE,24"
-          "GDK_BACKEND,wayland,x11,*"
-          "QT_QPA_PLATFORM,wayland;xcb"
-          "QT_STYLE_OVERRIDE,kvantum"
-          "SDL_VIDEODRIVER,wayland"
-          "MOZ_ENABLE_WAYLAND,1"
-          "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-          "OZONE_PLATFORM,wayland"
-          "XDG_SESSION_TYPE,wayland"
-          "XDG_CURRENT_DESKTOP,Hyprland"
-          "XDG_SESSION_DESKTOP,Hyprland"
-          "GDK_SCALE,1"
-        ];
-
         monitor = [
           ",preferred,auto,1.25"
           "DP-2,2560x1440@144,0x0,1"
           "eDP-1,preferred,auto,1.25"
         ];
 
-        bind =
-          [
-            "$mainMod, Q, killactive,"
-            "$mainMod, D, exec, $menu"
-            "$mainMod, RETURN, exec, $terminal"
-            "$mainMod, O, exec, ghostty"
-            "$mainMod CTRL, F, exec, uwsm app -- $fileManager --new-window"
-            "$mainMod SHIFT, F, exec, $terminal -e yazi"
-            "$mainMod, R, exec, $menu"
-            "$mainMod SHIFT, B, exec, $browser"
-            "$mainMod SHIFT ALT, B, exec, $browser --private"
-            ''$mainMod SHIFT, A, exec, launch-webapp "http://chatgpt.com"''
-            ''$mainMod SHIFT, Y, exec, launch-webapp "https://youtube.com/"''
-            ''$mainMod SHIFT, C, exec, launch-webapp "https://calendar.proton.me/"''
-            ''$mainMod SHIFT, E, exec, launch-webapp "https://mail.proton.me/"''
-            ''$mainMod CTRL, N, exec, launch-webapp "https://netflix.com/"''
-            ''$mainMod SHIFT, T, exec, launch-webapp "https://twitch.tv/"''
-            ''$mainMod SHIFT, R, exec, launch-webapp "https://reddit.com/"''
-            ''$mainMod CTRL, J, exec, launch-webapp "http://jellyfin.mertins.net"''
-            ''$mainMod SHIFT, N, exec, launch-webapp "http://joplin.mertins.net"''
-            "$mainMod ALT, T, exec, floating-terminal theme-switcher"
-            "$mainMod SHIFT, U, exec, floating-terminal sync-sys"
-            "$mainMod, T, togglefloating,"
-            "$mainMod, P, pseudo,"
-            "$mainMod, V, togglesplit,"
-            "$mainMod, F, fullscreen, 0"
-            "$mainMod, h, movefocus, l"
-            "$mainMod, l, movefocus, r"
-            "$mainMod, k, movefocus, u"
-            "$mainMod, j, movefocus, d"
-            "$mainMod SHIFT, h, movewindow, l"
-            "$mainMod SHIFT, l, movewindow, r"
-            "$mainMod SHIFT, k, movewindow, u"
-            "$mainMod SHIFT, j, movewindow, d"
-            "$mainMod ALT, L, resizeactive, 10 0"
-            "$mainMod ALT, H, resizeactive, -10 0"
-            "$mainMod ALT, K, resizeactive, 0 -10"
-            "$mainMod ALT, J, resizeactive, 0 10"
-            "$mainMod, 0, workspace, 10"
-            "$mainMod SHIFT, 0, movetoworkspace, 10"
-            "$mainMod CONTROL ALT, L, exec, dpidof hyprlock || hyprlock &"
-          ]
-          ++ (
-            builtins.concatLists (
-              builtins.genList
-              (i: let
-                ws = i + 1;
-                key =
-                  if ws == 10
-                  then "0"
-                  else builtins.toString ws;
-              in [
-                "$mainMod, ${key}, workspace, ${builtins.toString ws}"
-                "$mainMod SHIFT, ${key}, movetoworkspace, ${builtins.toString ws}"
-              ])
-              9
-            )
-          );
-
-        bindl = [
-          '', switch:on:Lid Switch, exec, hyprctl keyword monitor "eDP-1, disable"''
-          '', switch:off:Lid Switch, exec, hyprctl keyword monitor "eDP-1, preferred, auto, 1.25"''
+        bindl = with dsp; [
+          (bind "switch:on:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, disable'"))
+          (bind "switch:off:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, preferred, auto, 1.25'"))
         ];
 
-        bindd = [
-          ", PRINT, Screenshot with editing, exec, cmd-screenshot"
-          "SHIFT, PRINT, Screenshot to clipboard, exec, cmd-screenshot smart clipboard"
-          "SUPER, COMMA, Dismiss last notification, exec, makoctl dismiss"
-          "SUPER SHIFT, COMMA, Dismiss all notifications, exec, makoctl dismiss --all"
+        bindd = with dsp; [
+          (bind ", PRINT" (exec "cmd-screenshot"))
+          (bind "SHIFT, PRINT" (exec "cmd-screenshot smart clipboard"))
+
+          (bind "SUPER, COMMA" (exec "makoctl dismiss"))
+          (bind "SUPER SHIFT, COMMA" (exec "makoctl dismiss --all"))
         ];
 
-        bindeld = [
-          ", XF86AudioRaiseVolume, Volume up, exec, $osdclient --output-volume raise"
-          ", XF86AudioLowerVolume, Volume down, exec, $osdclient --output-volume lower"
-          ", XF86AudioMute, Mute, exec, $osdclient --output-volume mute-toggle"
-          ", XF86AudioMicMute, Mute microphone, exec, $osdclient --input-volume mute-toggle"
-          ", XF86MonBrightnessUp, Brightness up, exec, $osdclient --brightness raise"
-          ", XF86MonBrightnessDown, Brightness down, exec, $osdclient --brightness lower"
-          "ALT, XF86AudioRaiseVolume, Volume up precise, exec, $osdclient --output-volume +1"
-          "ALT, XF86AudioLowerVolume, Volume down precise, exec, $osdclient --output-volume -1"
-          "ALT, XF86MonBrightnessUp, Brightness up precise, exec, $osdclient --brightness +1"
-          "ALT, XF86MonBrightnessDown, Brightness down precise, exec, $osdclient --brightness -1"
+        bindeld = with dsp; [
+          # Volume
+          (bind ", XF86AudioRaiseVolume" (exec "$osdclient --output-volume raise"))
+          (bind ", XF86AudioLowerVolume" (exec "$osdclient --output-volume lower"))
+          (bind ", XF86AudioMute" (exec "$osdclient --output-volume mute-toggle"))
+          (bind ", XF86AudioMicMute" (exec "$osdclient --input-volume mute-toggle"))
+
+          # Brightness
+          (bind ", XF86MonBrightnessUp" (exec "$osdclient --brightness raise"))
+          (bind ", XF86MonBrightnessDown" (exec "$osdclient --brightness lower"))
+
+          # Precise volume (ALT)
+          (bind "ALT, XF86AudioRaiseVolume" (exec "$osdclient --output-volume +1"))
+          (bind "ALT, XF86AudioLowerVolume" (exec "$osdclient --output-volume -1"))
+
+          # Precise brightness (ALT)
+          (bind "ALT, XF86MonBrightnessUp" (exec "$osdclient --brightness +1"))
+          (bind "ALT, XF86MonBrightnessDown" (exec "$osdclient --brightness -1"))
         ];
 
-        bindmd = [
-          "SUPER, mouse:273, Resize window, resizewindow"
-          "SUPER, mouse:272, Move window, movewindow"
+        bindmd = with dsp; [
+          (bind "SUPER, mouse:273" resize)
+          (bind "SUPER, mouse:272" drag)
         ];
 
         workspace = [
