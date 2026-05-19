@@ -10,6 +10,7 @@
 
     wayland.windowManager.hyprland = {
       enable = true;
+      configType = "lua";
       systemd.enable = false;
       systemd.variables = ["--all"];
 
@@ -274,51 +275,65 @@
       };
 
       extraConfig = ''
+        hyprland.windowrulev2({
+            name = "no-gaps-wtv1",
 
-        windowrule {
-            name = no-gaps-wtv1
-            match:float = false
-            match:workspace = w[tv1]
+            match = {
+                floating = false,
+                workspace = "w[tv1]",
+            },
 
-            border_size = 0
-            rounding = 0
-        }
+            border_size = 0,
+            rounding = 0,
+        })
 
-        windowrule {
-            name = no-gaps-f1
-            match:float = false
-            match:workspace = f[1]
+        hyprland.windowrulev2({
+            name = "no-gaps-f1",
 
-            border_size = 0
-            rounding = 0
-        }
+            match = {
+                floating = false,
+                workspace = "f[1]",
+            },
 
-        windowrule {
-            name = suppress-maximize-events
-            match:class = .*
+            border_size = 0,
+            rounding = 0,
+        })
 
-            suppress_event = maximize
-        }
+        hyprland.windowrulev2({
+            name = "suppress-maximize-events",
 
-        windowrule {
-            name = fix-xwayland-drags
-            match:class = ^$
-            match:title = ^$
-            match:xwayland = true
-            match:float = true
-            match:fullscreen = false
-            match:pin = false
+            match = {
+                class = ".*",
+            },
 
-            no_focus = true
-        }
+            suppress_event = "maximize",
+        })
 
-        windowrule {
-            name = move-hyprland-run
-            match:class = hyprland-run
+        hyprland.windowrulev2({
+            name = "fix-xwayland-drags",
 
-            move = 20 monitor_h-120
-            float = yes
-        }
+            match = {
+                class = "^$",
+                title = "^$",
+                xwayland = true,
+                floating = true,
+                fullscreen = false,
+                pinned = false,
+            },
+
+            no_focus = true,
+        })
+
+        hyprland.windowrulev2({
+            name = "move-hyprland-run",
+
+            match = {
+                class = "hyprland-run",
+            },
+
+            move = "20 monitor_h-120",
+            floating = true,
+        })
       '';
     };
 
