@@ -80,186 +80,186 @@
             (mkEnv "XDG_SESSION_DESKTOP" "Hyprland")
             (mkEnv "GDK_SCALE" "1")
           ];
-        };
-        bind = with dsp; [
-          (bind "SUPER + RETURN" (exec "uwsm app -- $TERMINAL"))
-          (bind "SUPER + Q" close)
-          (bind "SUPER + D" (exec "uwsm app -- rofi -show drun"))
-          (bind "SUPER + O" (exec "ghostty"))
+          bind = with dsp; [
+            (bind "SUPER + RETURN" (exec "uwsm app -- $TERMINAL"))
+            (bind "SUPER + Q" close)
+            (bind "SUPER + D" (exec "uwsm app -- rofi -show drun"))
+            (bind "SUPER + O" (exec "ghostty"))
 
-          (bind "SUPER + CTRL + F" (exec "uwsm app -- nautilus --new-window"))
-          (bind "SUPER + SHIFT + F" (exec "uwsm app -- $TERMINAL -e yazi"))
+            (bind "SUPER + CTRL + F" (exec "uwsm app -- nautilus --new-window"))
+            (bind "SUPER + SHIFT + F" (exec "uwsm app -- $TERMINAL -e yazi"))
 
-          (bind "SUPER + R" (exec "uwsm app -- rofi -show drun"))
+            (bind "SUPER + R" (exec "uwsm app -- rofi -show drun"))
 
-          (bind "SUPER + SHIFT + B" (exec "launch-browser"))
-          (bind "SUPER + SHIFT + ALT + B" (exec "launch-browser --private"))
+            (bind "SUPER + SHIFT + B" (exec "launch-browser"))
+            (bind "SUPER + SHIFT + ALT + B" (exec "launch-browser --private"))
 
-          (bind "SUPER + SHIFT + A" (exec "launch-webapp http://chatgpt.com"))
-          (bind "SUPER + SHIFT + Y" (exec "launch-webapp https://youtube.com/"))
-          (bind "SUPER + SHIFT + C" (exec "launch-webapp https://calendar.proton.me/"))
-          (bind "SUPER + SHIFT + E" (exec "launch-webapp https://mail.proton.me/"))
-          (bind "SUPER + CTRL + N" (exec "launch-webapp https://netflix.com/"))
-          (bind "SUPER + SHIFT + T" (exec "launch-webapp https://twitch.tv/"))
-          (bind "SUPER + SHIFT + R" (exec "launch-webapp https://reddit.com/"))
-          (bind "SUPER + CTRL + J" (exec "launch-webapp http://jellyfin.mertins.net"))
-          (bind "SUPER + SHIFT + N" (exec "launch-webapp http://joplin.mertins.net"))
+            (bind "SUPER + SHIFT + A" (exec "launch-webapp http://chatgpt.com"))
+            (bind "SUPER + SHIFT + Y" (exec "launch-webapp https://youtube.com/"))
+            (bind "SUPER + SHIFT + C" (exec "launch-webapp https://calendar.proton.me/"))
+            (bind "SUPER + SHIFT + E" (exec "launch-webapp https://mail.proton.me/"))
+            (bind "SUPER + CTRL + N" (exec "launch-webapp https://netflix.com/"))
+            (bind "SUPER + SHIFT + T" (exec "launch-webapp https://twitch.tv/"))
+            (bind "SUPER + SHIFT + R" (exec "launch-webapp https://reddit.com/"))
+            (bind "SUPER + CTRL + J" (exec "launch-webapp http://jellyfin.mertins.net"))
+            (bind "SUPER + SHIFT + N" (exec "launch-webapp http://joplin.mertins.net"))
 
-          (bind "SUPER + ALT + T" (exec "floating-terminal theme-switcher"))
-          (bind "SUPER + SHIFT + U" (exec "floating-terminal sync-sys"))
+            (bind "SUPER + ALT + T" (exec "floating-terminal theme-switcher"))
+            (bind "SUPER + SHIFT + U" (exec "floating-terminal sync-sys"))
 
-          # Window controls
-          (bind "SUPER + T" float)
-          (bind "SUPER + P" pseudo)
-          (bind "SUPER + V" (layout "togglesplit"))
-          (bind "SUPER + F" fullscreen)
+            # Window controls
+            (bind "SUPER + T" float)
+            (bind "SUPER + P" pseudo)
+            (bind "SUPER + V" (layout "togglesplit"))
+            (bind "SUPER + F" fullscreen)
 
-          # Focus
-          (bind "SUPER + H" (focus "l"))
-          (bind "SUPER + L" (focus "r"))
-          (bind "SUPER + K" (focus "u"))
-          (bind "SUPER + J" (focus "d"))
+            # Focus
+            (bind "SUPER + H" (focus "l"))
+            (bind "SUPER + L" (focus "r"))
+            (bind "SUPER + K" (focus "u"))
+            (bind "SUPER + J" (focus "d"))
 
-          # Move windows
-          (bind "SUPER + SHIFT + H" (swap "l"))
-          (bind "SUPER + SHIFT + L" (swap "r"))
-          (bind "SUPER + SHIFT + K" (swap "u"))
-          (bind "SUPER + SHIFT + J" (swap "d"))
+            # Move windows
+            (bind "SUPER + SHIFT + H" (swap "l"))
+            (bind "SUPER + SHIFT + L" (swap "r"))
+            (bind "SUPER + SHIFT + K" (swap "u"))
+            (bind "SUPER + SHIFT + J" (swap "d"))
 
-          # Resize (still raw dispatcher-style call)
-          (bind "SUPER + ALT + L" (exec "hyprctl dispatch resizeactive 10 0"))
-          (bind "SUPER + ALT + H" (exec "hyprctl dispatch resizeactive -10 0"))
-          (bind "SUPER + ALT + K" (exec "hyprctl dispatch resizeactive 0 -10"))
-          (bind "SUPER + ALT + J" (exec "hyprctl dispatch resizeactive 0 10"))
+            # Resize (still raw dispatcher-style call)
+            (bind "SUPER + ALT + L" (exec "hyprctl dispatch resizeactive 10 0"))
+            (bind "SUPER + ALT + H" (exec "hyprctl dispatch resizeactive -10 0"))
+            (bind "SUPER + ALT + K" (exec "hyprctl dispatch resizeactive 0 -10"))
+            (bind "SUPER + ALT + J" (exec "hyprctl dispatch resizeactive 0 10"))
 
-          # Workspaces
-          (bind "SUPER + 0" (focusWorkspace 10))
-          (bind "SUPER + SHIFT + 0" (moveToWorkspace 10))
+            # Workspaces
+            (bind "SUPER + 0" (focusWorkspace 10))
+            (bind "SUPER + SHIFT + 0" (moveToWorkspace 10))
 
-          # Lock
-          (bind "SUPER + CTRL + ALT + L" (exec "pidof hyprlock || hyprlock &"))
-        ];
+            # Lock
+            (bind "SUPER + CTRL + ALT + L" (exec "pidof hyprlock || hyprlock &"))
+          ];
 
-        bindl = with dsp; [
-          (bind "switch:on:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, disable'"))
-          (bind "switch:off:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, preferred, auto, 1.25'"))
-        ];
+          bindl = with dsp; [
+            (bind "switch:on:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, disable'"))
+            (bind "switch:off:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, preferred, auto, 1.25'"))
+          ];
 
-        bindd = with dsp; [
-          (bind ", PRINT" (exec "cmd-screenshot"))
-          (bind "SHIFT, PRINT" (exec "cmd-screenshot smart clipboard"))
+          bindd = with dsp; [
+            (bind ", PRINT" (exec "cmd-screenshot"))
+            (bind "SHIFT, PRINT" (exec "cmd-screenshot smart clipboard"))
 
-          (bind "SUPER, COMMA" (exec "makoctl dismiss"))
-          (bind "SUPER SHIFT, COMMA" (exec "makoctl dismiss --all"))
-        ];
+            (bind "SUPER, COMMA" (exec "makoctl dismiss"))
+            (bind "SUPER SHIFT, COMMA" (exec "makoctl dismiss --all"))
+          ];
 
-        bindeld = with dsp; [
-          # Volume
-          (bind ", XF86AudioRaiseVolume" (exec "$osdclient --output-volume raise"))
-          (bind ", XF86AudioLowerVolume" (exec "$osdclient --output-volume lower"))
-          (bind ", XF86AudioMute" (exec "$osdclient --output-volume mute-toggle"))
-          (bind ", XF86AudioMicMute" (exec "$osdclient --input-volume mute-toggle"))
+          bindeld = with dsp; [
+            # Volume
+            (bind ", XF86AudioRaiseVolume" (exec "$osdclient --output-volume raise"))
+            (bind ", XF86AudioLowerVolume" (exec "$osdclient --output-volume lower"))
+            (bind ", XF86AudioMute" (exec "$osdclient --output-volume mute-toggle"))
+            (bind ", XF86AudioMicMute" (exec "$osdclient --input-volume mute-toggle"))
 
-          # Brightness
-          (bind ", XF86MonBrightnessUp" (exec "$osdclient --brightness raise"))
-          (bind ", XF86MonBrightnessDown" (exec "$osdclient --brightness lower"))
+            # Brightness
+            (bind ", XF86MonBrightnessUp" (exec "$osdclient --brightness raise"))
+            (bind ", XF86MonBrightnessDown" (exec "$osdclient --brightness lower"))
 
-          # Precise volume (ALT)
-          (bind "ALT, XF86AudioRaiseVolume" (exec "$osdclient --output-volume +1"))
-          (bind "ALT, XF86AudioLowerVolume" (exec "$osdclient --output-volume -1"))
+            # Precise volume (ALT)
+            (bind "ALT, XF86AudioRaiseVolume" (exec "$osdclient --output-volume +1"))
+            (bind "ALT, XF86AudioLowerVolume" (exec "$osdclient --output-volume -1"))
 
-          # Precise brightness (ALT)
-          (bind "ALT, XF86MonBrightnessUp" (exec "$osdclient --brightness +1"))
-          (bind "ALT, XF86MonBrightnessDown" (exec "$osdclient --brightness -1"))
-        ];
+            # Precise brightness (ALT)
+            (bind "ALT, XF86MonBrightnessUp" (exec "$osdclient --brightness +1"))
+            (bind "ALT, XF86MonBrightnessDown" (exec "$osdclient --brightness -1"))
+          ];
 
-        bindmd = with dsp; [
-          (bind "SUPER, mouse:273" resize)
-          (bind "SUPER, mouse:272" drag)
-        ];
+          bindmd = with dsp; [
+            (bind "SUPER, mouse:273" resize)
+            (bind "SUPER, mouse:272" drag)
+          ];
 
-        input = {
-          kb_layout = "dk";
-          kb_variant = "";
-          kb_model = "";
-          kb_options = "";
-          kb_rules = "";
+          input = {
+            kb_layout = "dk";
+            kb_variant = "";
+            kb_model = "";
+            kb_options = "";
+            kb_rules = "";
 
-          follow_mouse = 1;
-          sensitivity = 0;
-          repeat_rate = 40;
-          repeat_delay = 600;
-          accel_profile = "flat";
+            follow_mouse = 1;
+            sensitivity = 0;
+            repeat_rate = 40;
+            repeat_delay = 600;
+            accel_profile = "flat";
 
-          touchpad = {
-            natural_scroll = true;
+            touchpad = {
+              natural_scroll = true;
+            };
           };
-        };
 
-        xwayland = {
-          enabled = true;
-          force_zero_scaling = true;
-        };
-
-        ecosystem = {
-          no_update_news = true;
-        };
-
-        general = {
-          gaps_in = 5;
-          gaps_out = 10;
-          border_size = 2;
-          col = {
-            active_border = "rgb(ebbcba) rgb(31748f) rgb(eb6f92) rgb(c4a7e7) 90deg";
-            inactive_border = "rgba(595959aa)";
-          };
-          resize_on_border = false;
-          allow_tearing = false;
-          layout = "dwindle";
-        };
-
-        decoration = {
-          rounding = 0;
-
-          shadow = {
+          xwayland = {
             enabled = true;
-            range = 2;
-            render_power = 3;
-            color = "rgba(1a1a1aee)";
+            force_zero_scaling = true;
           };
 
-          blur = {
-            enabled = true;
-            size = 2;
-            passes = 2;
-            special = true;
-            brightness = 0.60;
-            contrast = 0.75;
+          ecosystem = {
+            no_update_news = true;
           };
-        };
 
-        animations = {
-          enabled = false;
-        };
+          general = {
+            gaps_in = 5;
+            gaps_out = 10;
+            border_size = 2;
+            col = {
+              active_border = "rgb(ebbcba) rgb(31748f) rgb(eb6f92) rgb(c4a7e7) 90deg";
+              inactive_border = "rgba(595959aa)";
+            };
+            resize_on_border = false;
+            allow_tearing = false;
+            layout = "dwindle";
+          };
 
-        dwindle = {
-          pseudotile = true;
-          preserve_split = true;
-          force_split = 2;
-        };
+          decoration = {
+            rounding = 0;
 
-        master = {
-          new_status = "master";
-        };
+            shadow = {
+              enabled = true;
+              range = 2;
+              render_power = 3;
+              color = "rgba(1a1a1aee)";
+            };
 
-        misc = {
-          key_press_enables_dpms = true;
-          mouse_move_enables_dpms = true;
-          disable_hyprland_logo = true;
-          disable_splash_rendering = true;
-          focus_on_activate = true;
-          anr_missed_pings = 3;
-          on_focus_under_fullscreen = 1;
+            blur = {
+              enabled = true;
+              size = 2;
+              passes = 2;
+              special = true;
+              brightness = 0.60;
+              contrast = 0.75;
+            };
+          };
+
+          animations = {
+            enabled = false;
+          };
+
+          dwindle = {
+            pseudotile = true;
+            preserve_split = true;
+            force_split = 2;
+          };
+
+          master = {
+            new_status = "master";
+          };
+
+          misc = {
+            key_press_enables_dpms = true;
+            mouse_move_enables_dpms = true;
+            disable_hyprland_logo = true;
+            disable_splash_rendering = true;
+            focus_on_activate = true;
+            anr_missed_pings = 3;
+            on_focus_under_fullscreen = 1;
+          };
         };
       };
     };
