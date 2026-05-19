@@ -6,6 +6,7 @@
     ...
   }: let
     lua = lib.generators.mkLuaInline;
+
     dsp = {
       exec = cmd: lua ''hl.dsp.exec_cmd("${cmd}")'';
       close = lua "hl.dsp.window.close()";
@@ -36,12 +37,6 @@
         (bind "SUPER + SHIFT + ${key}" (dsp.moveToWorkspace i))
       ]
     ) (lib.range 1 10);
-    mkEnv = name: value: {
-      _args = [
-        name
-        value
-      ];
-    };
   in {
     home.packages = with pkgs; [
       xdg-desktop-portal-gtk
@@ -54,212 +49,189 @@
       systemd.variables = ["--all"];
 
       settings = {
+        monitor = [
+          {
+            output = "DP-1";
+            mode = "3840x2160";
+            position = "0x0";
+            scale = "1.0";
+          }
+        ];
+
         config = {
-          monitor = [
-            {
-              output = "DP-";
-              mode = "2560x1440@144";
-              position = "0x0";
-              scale = 1;
-            }
-          ];
-
-          env = [
-            (mkEnv "HYPRCURSOR_SIZE" "24")
-            (mkEnv "XCURSOR_THEME" "Adwaita")
-            (mkEnv "XCURSOR_SIZE" "24")
-            (mkEnv "GDK_BACKEND" "wayland,x11,*")
-            (mkEnv "QT_QPA_PLATFORM" "wayland;xcb")
-            (mkEnv "QT_STYLE_OVERRIDE" "kvantum")
-            (mkEnv "SDL_VIDEODRIVER" "wayland")
-            (mkEnv "MOZ_ENABLE_WAYLAND" "1")
-            (mkEnv "ELECTRON_OZONE_PLATFORM_HINT" "wayland")
-            (mkEnv "OZONE_PLATFORM" "wayland")
-            (mkEnv "XDG_SESSION_TYPE" "wayland")
-            (mkEnv "XDG_CURRENT_DESKTOP" "Hyprland")
-            (mkEnv "XDG_SESSION_DESKTOP" "Hyprland")
-            (mkEnv "GDK_SCALE" "1")
-          ];
-          bind = with dsp; [
-            (bind "SUPER + RETURN" (exec "uwsm app -- $TERMINAL"))
-            (bind "SUPER + Q" close)
-            (bind "SUPER + D" (exec "uwsm app -- rofi -show drun"))
-            (bind "SUPER + O" (exec "ghostty"))
-
-            (bind "SUPER + CTRL + F" (exec "uwsm app -- nautilus --new-window"))
-            (bind "SUPER + SHIFT + F" (exec "uwsm app -- $TERMINAL -e yazi"))
-
-            (bind "SUPER + R" (exec "uwsm app -- rofi -show drun"))
-
-            (bind "SUPER + SHIFT + B" (exec "launch-browser"))
-            (bind "SUPER + SHIFT + ALT + B" (exec "launch-browser --private"))
-
-            (bind "SUPER + SHIFT + A" (exec "launch-webapp http://chatgpt.com"))
-            (bind "SUPER + SHIFT + Y" (exec "launch-webapp https://youtube.com/"))
-            (bind "SUPER + SHIFT + C" (exec "launch-webapp https://calendar.proton.me/"))
-            (bind "SUPER + SHIFT + E" (exec "launch-webapp https://mail.proton.me/"))
-            (bind "SUPER + CTRL + N" (exec "launch-webapp https://netflix.com/"))
-            (bind "SUPER + SHIFT + T" (exec "launch-webapp https://twitch.tv/"))
-            (bind "SUPER + SHIFT + R" (exec "launch-webapp https://reddit.com/"))
-            (bind "SUPER + CTRL + J" (exec "launch-webapp http://jellyfin.mertins.net"))
-            (bind "SUPER + SHIFT + N" (exec "launch-webapp http://joplin.mertins.net"))
-
-            (bind "SUPER + ALT + T" (exec "floating-terminal theme-switcher"))
-            (bind "SUPER + SHIFT + U" (exec "floating-terminal sync-sys"))
-
-            # Window controls
-            (bind "SUPER + T" float)
-            (bind "SUPER + P" pseudo)
-            (bind "SUPER + V" (layout "togglesplit"))
-            (bind "SUPER + F" fullscreen)
-
-            # Focus
-            (bind "SUPER + H" (focus "l"))
-            (bind "SUPER + L" (focus "r"))
-            (bind "SUPER + K" (focus "u"))
-            (bind "SUPER + J" (focus "d"))
-
-            # Move windows
-            (bind "SUPER + SHIFT + H" (swap "l"))
-            (bind "SUPER + SHIFT + L" (swap "r"))
-            (bind "SUPER + SHIFT + K" (swap "u"))
-            (bind "SUPER + SHIFT + J" (swap "d"))
-
-            # Resize (still raw dispatcher-style call)
-            (bind "SUPER + ALT + L" (exec "hyprctl dispatch resizeactive 10 0"))
-            (bind "SUPER + ALT + H" (exec "hyprctl dispatch resizeactive -10 0"))
-            (bind "SUPER + ALT + K" (exec "hyprctl dispatch resizeactive 0 -10"))
-            (bind "SUPER + ALT + J" (exec "hyprctl dispatch resizeactive 0 10"))
-
-            # Workspaces
-            (bind "SUPER + 0" (focusWorkspace 10))
-            (bind "SUPER + SHIFT + 0" (moveToWorkspace 10))
-
-            # Lock
-            (bind "SUPER + CTRL + ALT + L" (exec "pidof hyprlock || hyprlock &"))
-          ];
-
-          bindl = with dsp; [
-            (bind "switch:on:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, disable'"))
-            (bind "switch:off:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, preferred, auto, 1.25'"))
-          ];
-
-          bindd = with dsp; [
-            (bind ", PRINT" (exec "cmd-screenshot"))
-            (bind "SHIFT, PRINT" (exec "cmd-screenshot smart clipboard"))
-
-            (bind "SUPER, COMMA" (exec "makoctl dismiss"))
-            (bind "SUPER SHIFT, COMMA" (exec "makoctl dismiss --all"))
-          ];
-
-          bindeld = with dsp; [
-            # Volume
-            (bind ", XF86AudioRaiseVolume" (exec "$osdclient --output-volume raise"))
-            (bind ", XF86AudioLowerVolume" (exec "$osdclient --output-volume lower"))
-            (bind ", XF86AudioMute" (exec "$osdclient --output-volume mute-toggle"))
-            (bind ", XF86AudioMicMute" (exec "$osdclient --input-volume mute-toggle"))
-
-            # Brightness
-            (bind ", XF86MonBrightnessUp" (exec "$osdclient --brightness raise"))
-            (bind ", XF86MonBrightnessDown" (exec "$osdclient --brightness lower"))
-
-            # Precise volume (ALT)
-            (bind "ALT, XF86AudioRaiseVolume" (exec "$osdclient --output-volume +1"))
-            (bind "ALT, XF86AudioLowerVolume" (exec "$osdclient --output-volume -1"))
-
-            # Precise brightness (ALT)
-            (bind "ALT, XF86MonBrightnessUp" (exec "$osdclient --brightness +1"))
-            (bind "ALT, XF86MonBrightnessDown" (exec "$osdclient --brightness -1"))
-          ];
-
-          bindmd = with dsp; [
-            (bind "SUPER, mouse:273" resize)
-            (bind "SUPER, mouse:272" drag)
-          ];
-
-          input = {
-            kb_layout = "dk";
-            kb_variant = "";
-            kb_model = "";
-            kb_options = "";
-            kb_rules = "";
-
-            follow_mouse = 1;
-            sensitivity = 0;
-            repeat_rate = 40;
-            repeat_delay = 600;
-            accel_profile = "flat";
-
-            touchpad = {
-              natural_scroll = true;
-            };
-          };
-
-          xwayland = {
-            enabled = true;
-            force_zero_scaling = true;
-          };
-
-          ecosystem = {
-            no_update_news = true;
-          };
-
           general = {
             gaps_in = 5;
-            gaps_out = 10;
-            border_size = 2;
+            gaps_out = 5;
+            border_size = 1;
             col = {
-              active_border = "rgb(ebbcba)";
-              inactive_border = "rgba(595959aa)";
+              active_border = "rgb(e1e1e1)";
+              inactive_border = "rgb(151515)";
             };
-            resize_on_border = false;
-            allow_tearing = false;
-            layout = "dwindle";
           };
 
           decoration = {
-            rounding = 0;
-
-            shadow = {
-              enabled = true;
-              range = 2;
-              render_power = 3;
-              color = "rgba(1a1a1aee)";
-            };
-
+            rounding = 5;
+            active_opacity = 1.0;
+            inactive_opacity = 1.0;
             blur = {
               enabled = true;
-              size = 2;
-              passes = 2;
-              special = true;
-              brightness = 0.60;
-              contrast = 0.75;
+              size = 3;
+              passes = 1;
+              vibrancy = 0.1696;
             };
           };
 
           animations = {
-            enabled = false;
+            enabled = true;
           };
 
           dwindle = {
-            preserve_split = true;
             force_split = 2;
-          };
-
-          master = {
-            new_status = "master";
+            preserve_split = true;
           };
 
           misc = {
-            key_press_enables_dpms = true;
-            mouse_move_enables_dpms = true;
+            force_default_wallpaper = -1;
             disable_hyprland_logo = true;
-            disable_splash_rendering = true;
-            focus_on_activate = true;
-            anr_missed_pings = 3;
-            on_focus_under_fullscreen = 1;
+          };
+
+          input = {
+            kb_layout = "us";
+            follow_mouse = 0;
+            sensitivity = -0.2;
+            natural_scroll = true;
+            touchpad = {
+              natural_scroll = true;
+            };
           };
         };
+
+        curve = [
+          {
+            _args = [
+              "myBezier"
+              {
+                type = "bezier";
+                points = lua "{ {0.05, 0.9}, {0.1, 1.05} }";
+              }
+            ];
+          }
+        ];
+
+        animation = [
+          {
+            leaf = "windows";
+            enabled = true;
+            speed = 7;
+            bezier = "myBezier";
+          }
+          {
+            leaf = "windowsOut";
+            enabled = true;
+            speed = 7;
+            bezier = "default";
+            style = "popin 80%";
+          }
+          {
+            leaf = "border";
+            enabled = true;
+            speed = 10;
+            bezier = "default";
+          }
+          {
+            leaf = "borderangle";
+            enabled = true;
+            speed = 8;
+            bezier = "default";
+          }
+          {
+            leaf = "fade";
+            enabled = true;
+            speed = 7;
+            bezier = "default";
+          }
+          {
+            leaf = "workspaces";
+            enabled = true;
+            speed = 6;
+            bezier = "default";
+          }
+        ];
+
+        window_rule = [
+          {
+            match = {
+              class = "^(kitty)$";
+              title = "^(bw-unlock)$";
+            };
+            float = true;
+          }
+        ];
+
+        bind =
+          [
+            # App launchers
+            (bind "SUPER + RETURN" (dsp.exec "ghostty"))
+            (bind "SUPER + B" (dsp.exec "zen-twilight -P default"))
+            (bind "SUPER + SPACE" (dsp.exec "walker"))
+            (bind "SUPER + CTRL + V" (dsp.exec "walker -m clipboard"))
+            (bind "SUPER + M" (dsp.exec "kitty nvim ~/Cortex/00_NOTES/temp.md"))
+
+            # Screenshots
+            (bind "SUPER + CTRL + 4" (dsp.exec "grimblast copysave area"))
+            (bind "SUPER + CTRL + 5" (dsp.exec "grimblast copysave screen"))
+
+            # Universal copy/paste
+            (bind "SUPER + C" (dsp.sendshortcut "CTRL" "Insert"))
+            (bind "SUPER + V" (dsp.sendshortcut "SHIFT" "Insert"))
+            (bind "SUPER + X" (dsp.sendshortcut "CTRL" "X"))
+
+            # Window management
+            (bind "SUPER + Q" dsp.close)
+            (bind "SUPER + SHIFT + Q" dsp.exit)
+            (bind "SUPER + CTRL + Q" (dsp.exec "hyprlock"))
+            (bind "SUPER + T" dsp.float)
+            (bind "SUPER + F" dsp.fullscreen)
+            (bind "SUPER + P" dsp.pseudo)
+            (bind "SUPER + J" (dsp.layout "togglesplit"))
+
+            # Focus
+            (bind "SUPER + left" (dsp.focus "left"))
+            (bind "SUPER + right" (dsp.focus "right"))
+            (bind "SUPER + up" (dsp.focus "up"))
+            (bind "SUPER + down" (dsp.focus "down"))
+
+            # Swap windows
+            (bind "SUPER + SHIFT + left" (dsp.swap "left"))
+            (bind "SUPER + SHIFT + right" (dsp.swap "right"))
+            (bind "SUPER + SHIFT + up" (dsp.swap "up"))
+            (bind "SUPER + SHIFT + down" (dsp.swap "down"))
+
+            # Special workspace
+            (bind "SUPER + S" (dsp.toggleSpecial "magic"))
+            (bind "SUPER + SHIFT + S" (dsp.moveToSpecial "magic"))
+
+            # Scroll through workspaces
+            (bind "SUPER + mouse_down" (dsp.focusWorkspace "e+1"))
+            (bind "SUPER + mouse_up" (dsp.focusWorkspace "e-1"))
+
+            # Volume keys
+            (bindOpts "XF86AudioRaiseVolume" (dsp.exec "wpctl set-volume @ 5%+") {
+              locked = true;
+              repeating = true;
+            })
+            (bindOpts "XF86AudioLowerVolume" (dsp.exec "wpctl set-volume @ 5%-") {
+              locked = true;
+              repeating = true;
+            })
+            (bindOpts "XF86AudioMute" (dsp.exec "wpctl set-mute @ toggle") {locked = true;})
+            (bindOpts "XF86AudioMicMute" (dsp.exec "wpctl set-mute u/DEFAULT_AUDIO_SOURCE@ toggle") {locked = true;})
+
+            # Mouse move/resize
+            (bindOpts "SUPER + mouse:272" dsp.drag {mouse = true;})
+            (bindOpts "SUPER + mouse:273" dsp.resize {mouse = true;})
+          ]
+          ++ workspaceBinds;
       };
     };
 
