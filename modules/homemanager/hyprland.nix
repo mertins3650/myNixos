@@ -140,16 +140,6 @@
           (bind "SUPER + CTRL + ALT + L" (exec "pidof hyprlock || hyprlock &"))
         ];
 
-        exec-once = [
-          "uwsm app -- hypridle"
-          "uwsm app -- mako"
-          "uwsm app -- waybar"
-          "uwsm app -- swaybg -i /home/simonm/myNixos/defaults/background.png -m fill"
-          "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-          "systemctl --user import-environment $(env | cut -d'=' -f 1)"
-          "dbus-update-activation-environment --systemd --all"
-        ];
-
         bindl = with dsp; [
           (bind "switch:on:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, disable'"))
           (bind "switch:off:Lid Switch" (exec "hyprctl keyword monitor 'eDP-1, preferred, auto, 1.25'"))
