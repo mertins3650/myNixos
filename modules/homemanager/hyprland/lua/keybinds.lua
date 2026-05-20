@@ -46,6 +46,9 @@ local descriptive_binds = {
 	{ "SUPER + COMMA", hl.dsp.exec_cmd("makoctl dismiss"), "Dismiss last notification" },
 	{ "SUPER + SHIFT + COMMA", hl.dsp.exec_cmd("makoctl dismiss --all"), "Dismiss all notifications" },
 }
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client-wrapper --output-volume raise"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client-wrapper --output-volume lower"))
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client-wrapper --output-volume mute-toggle"))
 
 for _, b in ipairs(descriptive_binds) do
 	hl.bind(b[1], b[2], { description = b[3] })
