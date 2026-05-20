@@ -1,8 +1,20 @@
-hl.config({
-	monitor = {
-		output = "",
-		mode = "preffered",
-		position = "auto",
-		scale = 1.25,
-	},
+hl.monitor({
+	output = "",
+	mode = "preffered",
+	position = "auto",
+	scale = 1.25,
+})
+
+hl.monitor({
+	output = "DP-2",
+	mode = "2560x1440@144",
+	position = "0x0",
+	scale = 1,
+})
+
+hl.monitor({
+	output = "eDP-1",
+	mode = "preffered",
+	position = "auto",
+	scale = 1.25,
 })
