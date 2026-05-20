@@ -9,12 +9,7 @@
       xdg-desktop-portal-gtk
     ];
 
-    wayland.windowManager.hyprland = {
-      enable = true;
-      configType = "lua";
-      systemd.enable = false;
-      systemd.variables = ["--all"];
-    };
+    wayland.windowManager.hyprland.enable = false;
     home.file.".local/share/hypr/stubs".source = "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/share/hypr/stubs";
 
     xdg.configFile."hypr/hyprland.lua".source =
