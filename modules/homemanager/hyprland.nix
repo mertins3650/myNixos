@@ -20,6 +20,14 @@
       config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/myNixos/modules/homemanager/hyprland/lua/env.lua";
 
+    xdg.configFile."hypr/input.lua".source =
+      config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/myNixos/modules/homemanager/hyprland/lua/input.lua";
+
+    xdg.configFile."hypr/monitor.lua".source =
+      config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/myNixos/modules/homemanager/hyprland/lua/monitor.lua";
+
     xdg.configFile."hypr/exec.lua".source =
       config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/myNixos/modules/homemanager/hyprland/lua/exec.lua";
