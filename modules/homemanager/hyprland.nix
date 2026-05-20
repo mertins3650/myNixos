@@ -15,7 +15,7 @@
       systemd.enable = false;
       systemd.variables = ["--all"];
     };
-    home.file.".local/share/hypr/stubs".source = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/share/hypr/stubs";
+    home.file.".local/share/hypr/stubs".source = "${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/share/hypr/stubs";
 
     xdg.configFile."hypr/hyprland.lua".source =
       config.lib.file.mkOutOfStoreSymlink
