@@ -24,7 +24,7 @@
               progress="0.01"
           fi
 
-          omarchy-swayosd-client \
+          swayosd-client-wrapper \
             --custom-icon display-brightness-symbolic \
             --custom-progress "$progress" \
             --custom-progress-text "$(printf '%3d%%' "$percent")"

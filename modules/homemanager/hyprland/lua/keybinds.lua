@@ -50,6 +50,9 @@ hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client-wrapper --output
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client-wrapper --output-volume lower"))
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client-wrapper --output-volume mute-toggle"))
 
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-brightness +5%"))
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-brightness +5%-"))
+
 for _, b in ipairs(descriptive_binds) do
 	hl.bind(b[1], b[2], { description = b[3] })
 end
