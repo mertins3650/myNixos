@@ -7,7 +7,7 @@
         runtimeInputs = with pkgs; [
           brightnessctl
           coreutils
-          util-linux # flock
+          util-linux
           gawk
           hyprland
         ];
@@ -32,16 +32,18 @@
           exec 9>"$runtime_dir/omarchy-brightness-display.lock"
           flock -n 9 || exit 0
 
-          device="$(ls -1 /sys/class/backlight 2>/dev/null | head -n1)"
-
-          for candidate in amdgpu_bl* intel_backlight acpi_video*; do
-            if [[ -e "/sys/class/backlight/$candidate" ]]; then
-              device="$candidate"
-              break
-            fi
+          # Pick first available backlight device (ShellCheck-safe)
+          device=""
+          for d in /sys/class/backlight/*; do
+            device="''${d##*/}"
+            break
           done
 
-          # Apple fallback removed unless you also convert those scripts
+          # Fallback safety (in case no backlight exists)
+          if [[ -z "$device" ]]; then
+            echo "No backlight device found" >&2
+            exit 1
+          fi
 
           current=$(brightnessctl -d "$device" -m | cut -d',' -f4 | tr -d '%')
 
@@ -54,11 +56,12 @@
 
             (( target > 100 )) && target=100
             step="$target%"
+
           elif [[ "$step" == "5%-" ]]; then
             if (( current <= 5 )); then
               target=$((current - 1))
             else
-              target=$((current - 5 ))
+              target=$((current - 5))
             fi
 
             (( target < 1 )) && target=1

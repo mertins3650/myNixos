@@ -3,23 +3,26 @@ local app = function(cmd)
 	return hl.dsp.exec_cmd("uwsm app -- " .. cmd)
 end
 
-local focus = function(cmd)
-	return hl.dsp.focus({ direction = cmd })
+local focus = function(dir)
+	return hl.dsp.focus({ direction = dir })
 end
 
-local move_focus = function(cmd)
-	return hl.dsp.window.move({ direction = cmd })
+local move_focus = function(dir)
+	return hl.dsp.window.move({ direction = dir })
 end
 
-local focus_workspace = function(cmd)
-	return hl.dsp.focus({ workspace = cmd })
+local focus_workspace = function(ws)
+	return hl.dsp.focus({ workspace = ws })
 end
 
-local move_workspace = function(cmd)
-	return hl.dsp.window.move({ workspace = cmd })
+local move_workspace = function(ws)
+	return hl.dsp.window.move({ workspace = ws })
 end
 
--- Binds without flags or unique logic
+local exec = function(cmd)
+	return hl.dsp.exec_cmd(cmd)
+end
+
 local binds = {
 	{ "SUPER + RETURN", app("ghostty") },
 	{ "SUPER + D", app("rofi -show drun") },
@@ -34,38 +37,29 @@ local binds = {
 	{ "SUPER + SHIFT + J", move_focus("down") },
 	{ "SUPER + SHIFT + K", move_focus("up") },
 	{ "SUPER + SHIFT + L", move_focus("right") },
+	-- screenshots
+	{ "PRINT", exec("cmd-screenshot"), "Screenshot with editing" },
+	{ "SHIFT + PRINT", exec("cmd-screenshot smart clipboard"), "Screenshot to clipboard" },
+	-- dismiss notifications
+	{ "SUPER + COMMA", exec("makoctl dismiss"), "Dismiss last notification" },
+	{ "SUPER + SHIFT + COMMA", exec("makoctl dismiss --all"), "Dismiss all notifications" },
+	-- audio and brightness
+	{ "XF86AudioRaiseVolume", exec("swayosd-client-wrapper --output-volume raise") },
+	{ "XF86AudioLowerVolume", exec("swayosd-client-wrapper --output-volume lower") },
+	{ "XF86AudioMute", exec("swayosd-client-wrapper --output-volume mute-toggle") },
+	{ "XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-brightness-display +5%") },
+	{ "XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-brightness-display +5%-") },
 }
 
 for _, bind in ipairs(binds) do
-	hl.bind(bind[1], bind[2])
-end
-
-local descriptive_binds = {
-	{ "PRINT", hl.dsp.exec_cmd("cmd-screenshot"), "Screenshot with editing" },
-	{ "SHIFT + PRINT", hl.dsp.exec_cmd("cmd-screenshot smart clipboard"), "Screenshot to clipboard" },
-	{ "SUPER + COMMA", hl.dsp.exec_cmd("makoctl dismiss"), "Dismiss last notification" },
-	{ "SUPER + SHIFT + COMMA", hl.dsp.exec_cmd("makoctl dismiss --all"), "Dismiss all notifications" },
-}
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client-wrapper --output-volume raise"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client-wrapper --output-volume lower"))
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client-wrapper --output-volume mute-toggle"))
-
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-brightness +5%"))
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-brightness +5%-"))
-
-for _, b in ipairs(descriptive_binds) do
-	hl.bind(b[1], b[2], { description = b[3] })
+	hl.bind(bind[1], bind[2], bind[3] and { description = bind[3] } or nil)
 end
 
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Resize window" })
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true, description = "Move window" })
 
--- move focus to workspace
+-- focus/move to workspace
 for i = 1, 9 do
 	hl.bind("SUPER + " .. i, focus_workspace(i))
-end
-
--- move window to workspace
-for i = 1, 9 do
 	hl.bind("SUPER + SHIFT + " .. i, move_workspace(i))
 end
