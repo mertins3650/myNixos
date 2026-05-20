@@ -19,6 +19,7 @@ local move_workspace = function(cmd)
 	return hl.dsp.window.move({ workspace = cmd })
 end
 
+-- Binds without flags or unique logic
 local binds = {
 	{ "SUPER + RETURN", app("ghostty") },
 	{ "SUPER + D", app("rofi -show drun") },
@@ -38,6 +39,21 @@ local binds = {
 for _, bind in ipairs(binds) do
 	hl.bind(bind[1], bind[2])
 end
+
+local descriptive_binds = {
+	{ "PRINT", hl.dsp.exec_cmd("cmd-screenshot"), "Screenshot with editing" },
+	{ "SHIFT + PRINT", hl.dsp.exec_cmd("cmd-screenshot smart clipboard"), "Screenshot to clipboard" },
+	{ "SUPER + COMMA", hl.dsp.exec_cmd("makoctl dismiss"), "Dismiss last notification" },
+	{ "SUPER + SHIFT + COMMA", hl.dsp.exec_cmd("makoctl dismiss --all"), "Dismiss all notifications" },
+}
+
+for _, b in ipairs(descriptive_binds) do
+	hl.bind(b[1], b[2], { description = b[3] })
+end
+
+hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Resize window" })
+hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true, description = "Move window" })
+
 -- move focus to workspace
 for i = 1, 9 do
 	hl.bind("SUPER + " .. i, focus_workspace(i))
