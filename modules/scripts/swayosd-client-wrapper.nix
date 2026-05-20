@@ -2,24 +2,23 @@
   flake.homeModules.scripts = {pkgs, ...}: {
     home.packages = [
       (pkgs.writeShellApplication {
-        name = "swayosd-client";
+        name = "swayosd-client-wrapper";
 
         runtimeInputs = with pkgs; [
           hyprland
           jq
+          swayosd
         ];
 
         text = ''
           set -euo pipefail
 
-          monitor_focused() {
+          monitor() {
               hyprctl monitors -j | jq -r '.[] | select(.focused == true).name'
           }
 
-          monitor="$(monitor_focused)"
-
-          exec ${pkgs.swayosd}/bin/swayosd-client \
-              --monitor "$monitor" \
+          exec swayosd-client \
+              --monitor "$(monitor)" \
               "$@"
         '';
       })
