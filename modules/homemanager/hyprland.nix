@@ -16,6 +16,18 @@
       config.lib.file.mkOutOfStoreSymlink
       "${config.home.homeDirectory}/myNixos/modules/homemanager/hyprland/lua/hyprland.lua";
 
+    xdg.configFile."hypr/env.lua".source =
+      config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/myNixos/modules/homemanager/hyprland/lua/env.lua";
+
+    xdg.configFile."hypr/exec.lua".source =
+      config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/myNixos/modules/homemanager/hyprland/lua/exec.lua";
+
+    xdg.configFile."hypr/keybinds.lua".source =
+      config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/myNixos/modules/homemanager/hyprland/lua/keybinds.lua";
+
     home.sessionVariables = {
       TERMINAL = "xdg-terminal-exec";
       EDITOR = "nvim";
