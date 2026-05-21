@@ -58,6 +58,7 @@ hl.config({
 		focus_on_activate = true,
 		anr_missed_pings = 3,
 		on_focus_under_fullscreen = 1,
+		disable_watchdog_warning = true,
 	},
 
 	cursor = {
