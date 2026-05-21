@@ -3,6 +3,10 @@ local app = function(cmd)
 	return hl.dsp.exec_cmd("uwsm app -- " .. cmd)
 end
 
+local wep_app = function(cmd)
+	return hl.dsp.exec_cmd('launch-webapp "' .. cmd .. '"')
+end
+
 local focus = function(dir)
 	return hl.dsp.focus({ direction = dir })
 end
@@ -24,9 +28,28 @@ local exec = function(cmd)
 end
 
 local binds = {
+	-- apps
 	{ "SUPER + RETURN", app("ghostty") },
 	{ "SUPER + D", app("rofi -show drun") },
-	{ "SUPER + Q", hl.dsp.window.kill() },
+	{ "SUPER + CTRL + F", app("nautilus --new-window") },
+	{ "SUPER + SHIFT + F", app("ghostty -e yazi") },
+	{ "SUPER + SHIFT + B", app("launch-browser") },
+	{ "SUPER + SHIFT + ALT + B", app("launch-browser --private") },
+
+	-- webapps
+	{ "SUPER + SHIFT + A", wep_app("http://chatgpt.com") },
+	{ "SUPER + SHIFT + Y", wep_app("https://youtube.com") },
+	{ "SUPER + SHIFT + C", wep_app("https://calendar.proton.me/") },
+	{ "SUPER + SHIFT + E", wep_app("https://mail.proton.me/") },
+	{ "SUPER + SHIFT + T", wep_app("https://twitch.tv") },
+	{ "SUPER + SHIFT + R", wep_app("https://reddit.com") },
+	{ "SUPER + CTRL + J", wep_app("http://jellyfin.mertins.net") },
+
+	-- window management
+	{ "SUPER + T", hl.dsp.window.float("true") },
+	{ "SUPER + P", hl.dsp.window.pseudo("true") },
+	{ "SUPER + F", hl.dsp.window.fullscreen("fullscreen") },
+	{ "SUPER + Q", hl.dsp.window.close() },
 	-- focus window
 	{ "SUPER + H", focus("left") },
 	{ "SUPER + J", focus("down") },
@@ -44,15 +67,48 @@ local binds = {
 	{ "SUPER + COMMA", exec("makoctl dismiss"), "Dismiss last notification" },
 	{ "SUPER + SHIFT + COMMA", exec("makoctl dismiss --all"), "Dismiss all notifications" },
 	-- audio and brightness
-	{ "XF86AudioRaiseVolume", exec("swayosd-client-wrapper --output-volume raise") },
-	{ "XF86AudioLowerVolume", exec("swayosd-client-wrapper --output-volume lower") },
+	{
+		"XF86AudioRaiseVolume",
+		exec("swayosd-client-wrapper --output-volume raise"),
+		{ locked = true, repeating = true },
+	},
+	{
+		"XF86AudioLowerVolume",
+		exec("swayosd-client-wrapper --output-volume lower"),
+		{ locked = true, repeating = true },
+	},
 	{ "XF86AudioMute", exec("swayosd-client-wrapper --output-volume mute-toggle") },
-	{ "XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-brightness-display +5%") },
-	{ "XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-brightness-display +5%-") },
+	{ "XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-brightness-display +5%"), { locked = true, repeating = true } },
+	{
+		"XF86MonBrightnessDown",
+		hl.dsp.exec_cmd("swayosd-brightness-display +5%-"),
+		{ locked = true, repeating = true },
+	},
+	-- laptop lid
+	{
+		"switch:on:Lid Switch",
+		function()
+			hl.monitor({ output = "eDP-1", disabled = true })
+		end,
+		{ locked = true },
+	},
+	{
+		"switch:off:Lid Switch",
+		function()
+			hl.monitor({
+				output = "eDP-1",
+				mode = "preferred",
+				position = "auto",
+				scale = 1.25,
+				disabled = false,
+			})
+		end,
+		{ locked = true },
+	},
 }
 
 for _, bind in ipairs(binds) do
-	hl.bind(bind[1], bind[2], bind[3] and { description = bind[3] } or nil)
+	hl.bind(bind[1], bind[2], bind[3] or nil)
 end
 
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Resize window" })

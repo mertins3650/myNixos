@@ -1,4 +1,5 @@
 require("env")
+require("looknfeel")
 require("exec")
 require("input")
 require("keybinds")
