@@ -31,12 +31,6 @@ local window_rules = {
 	{ match = { class = "hyprland-run" }, float = true, move = "20 monitor_h-120" },
 
 	{ match = { class = "steam" }, float = true },
-	{ match = { class = "steam" }, opacity = "1 1" },
-	{ match = { class = "steam" }, idle_inhibit = "fullscreen" },
-	{ match = { class = "steam", title = "Steam" }, center = true },
-	{ match = { class = "steam", title = "Steam" }, size = { 1100, 700 } },
-	{ match = { class = "steam", title = "Friends List" }, size = { 460, 800 } },
-
 	{
 		match = {
 			class = "^$",

@@ -1,11 +1,14 @@
 {
-    "workspace.library": [
-        "${3rd}/luv/library",
-        "${3rd}/luassert/library",
-        "/usr/share/hypr/stubs"
+  "workspace": {
+    "library": [
+      "/home/simonm/.local/share/hypr/stubs",
+      "${3rd}/luv/library",
+      "${3rd}/luassert/library",
     ],
-    "diagnostics.globals": [
-        "vim",
-        "hl"
-    ]
+    "checkThirdParty": false
+  },
+  "diagnostics": {
+    "globals": ["vim"]
+  },
 }
+
