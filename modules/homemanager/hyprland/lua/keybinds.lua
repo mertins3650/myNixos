@@ -27,6 +27,20 @@ local exec = function(cmd)
 	return hl.dsp.exec_cmd(cmd)
 end
 
+local function has_external_monitor()
+	local monitors = hl.get_monitors()
+
+	if #monitors > 1 then
+		return true
+	end
+
+	if #monitors == 1 and monitors[1].name ~= "eDP-1" then
+		return true
+	end
+
+	return false
+end
+
 local binds = {
 	-- apps
 	{ "SUPER + RETURN", app("ghostty") },
@@ -88,7 +102,9 @@ local binds = {
 	{
 		"switch:on:Lid Switch",
 		function()
-			hl.monitor({ output = "eDP-1", disabled = true })
+			if has_external_monitor() then
+				hl.monitor({ output = "eDP-1", disabled = true })
+			end
 		end,
 		{ locked = true },
 	},

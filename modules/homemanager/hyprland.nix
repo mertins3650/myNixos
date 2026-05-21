@@ -12,6 +12,7 @@
       "input.lua"
       "monitor.lua"
       "exec.lua"
+      "rules.lua"
       "keybinds.lua"
       "looknfeel.lua"
     ];
