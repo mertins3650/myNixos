@@ -14,7 +14,6 @@
       "exec.lua"
       "rules.lua"
       "keybinds.lua"
-      "looknfeel.lua"
     ];
 
     basePath = "${config.home.homeDirectory}/myNixos/modules/homemanager/hyprland/lua";
