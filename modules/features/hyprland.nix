@@ -1,17 +1,21 @@
 {...}: {
-  flake.nixosModules.desktopenv = {pkgs, ...}: {
+  flake.nixosModules.hyprland = {pkgs, ...}: {
     programs.hyprland = {
       enable = true;
       withUWSM = true;
       xwayland.enable = true;
     };
 
+    # Hyprland Cachix — the flake build isn't in cache.nixos.org, so subscribe
+    # to the official hyprland.cachix.org binary cache to avoid compiling from
+    # source on every flake input bump. See https://wiki.hypr.land/Nix/Cachix/
     nix.settings = {
       substituters = ["https://hyprland.cachix.org"];
       trusted-substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
 
+    # UWSM configuration
     programs.uwsm = {
       enable = true;
       waylandCompositors.hyprland = {
@@ -21,40 +25,12 @@
       };
     };
 
-    services.udisks2.enable = true;
-    services.devmon.enable = true;
-    services.gvfs.enable = true;
-    services.xserver.updateDbusEnvironment = true;
-    services.dbus.implementation = "broker";
-
-    # xdg.portal = {
-    #   enable = true;
-    #   xdgOpenUsePortal = true;
-    #
-    #   extraPortals = [
-    #     pkgs.xdg-desktop-portal-gtk
-    #   ];
-    #
-    #   config = {
-    #     common = {
-    #       default = ["hyprland" "gtk"];
-    #       "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
-    #     };
-    #
-    #     hyprland = {
-    #       default = ["hyprland" "gtk"];
-    #       "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
-    #     };
-    #   };
-    # };
-
     xdg.portal = {
       enable = true;
       wlr.enable = false; # Disable wlr when using Hyprland
       xdgOpenUsePortal = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-hyprland
       ];
       config = {
         common = {
@@ -71,16 +47,5 @@
         };
       };
     };
-    environment.systemPackages = [
-      pkgs.wl-clipboard
-      pkgs.nautilus
-      pkgs.glib
-      pkgs.swaybg
-      pkgs.brightnessctl
-      pkgs.yaru-theme
-      pkgs.bluetui
-      pkgs.wiremix
-      pkgs.impala
-    ];
   };
 }

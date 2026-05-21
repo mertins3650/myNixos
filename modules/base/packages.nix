@@ -1,13 +1,10 @@
-
-{ ... }: {
-  flake.nixosModules.base = { pkgs,  ...}: {
-	
-  environment.systemPackages = with pkgs; [
-kitty
-    unzip 
-    vim
-        zip
-    file-roller
-  ];
+{...}: {
+  flake.nixosModules.base = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      unzip
+      vim
+      zip
+      file-roller
+    ];
   };
 }
