@@ -51,7 +51,7 @@ local binds = {
 	{ "SUPER + SHIFT + ALT + B", app("launch-browser --private") },
 
 	-- webapps
-	{ "SUPER + SHIFT + A", wep_app("http://chatgpt.com") },
+	{ "SUPER + SHIFT + A", wep_app("https://chat.deepseek.com/") },
 	{ "SUPER + SHIFT + Y", wep_app("https://youtube.com") },
 	{ "SUPER + SHIFT + C", wep_app("https://calendar.proton.me/") },
 	{ "SUPER + SHIFT + E", wep_app("https://mail.proton.me/") },
