@@ -4,6 +4,7 @@
       wireless.iwd.enable = true;
       firewall.enable = true;
     };
+    nix.optimise.automatic = true;
     nix.settings.experimental-features = ["nix-command" "flakes"];
     programs.dconf.enable = true;
     nixpkgs.config.allowUnfree = true;
