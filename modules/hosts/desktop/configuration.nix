@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.desktopConfiguration = {...}: {
+  flake.nixosModules.desktopConfiguration = {pkgs, ...}: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules.base
@@ -45,6 +45,9 @@
     networking.hostName = "desktop"; # Define your hostname.
     hardware.cpu.amd.updateMicrocode = true;
     hardware.graphics.enable = true;
+    environment.systemPackages = with pkgs; [
+      orca-slicer
+    ];
 
     system.stateVersion = "25.11"; # Did you read the comment?
   };
