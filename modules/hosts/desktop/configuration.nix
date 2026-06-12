@@ -7,7 +7,6 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules.base
-      self.nixosModules.zenbrowser
       self.nixosModules.desktopHardware
       self.nixosModules.desktopenv
       self.nixosModules.development
