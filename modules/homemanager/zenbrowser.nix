@@ -79,5 +79,6 @@
         }
       )
     ];
+    home.sessionVariables.BROWSER = "zen";
   };
 }
