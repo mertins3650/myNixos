@@ -12,19 +12,25 @@
         installation_mode = "normal_installed";
       };
     };
+    prefs = {
+      # Check these out at about:config
+      "extensions.autoDisableScopes" = 0;
+      "extensions.pocket.enabled" = false;
+      # ...
+    };
 
     extensions = [
       # To add additional extensions, find it on addons.mozilla.org, find
       # the short ID in the url (like https://addons.mozilla.org/en-US/firefox/addon/!SHORT_ID!/)
       # Then go to https://addons.mozilla.org/api/v5/addons/addon/!SHORT_ID!/ to get the guid
       (extension "ublock-origin" "uBlock0@raymondhill.net")
-      (extension "vimium" "d7742d87-e61d-4b78-b8a1-b469842139fa")
-      (extension "1Password" "d634138d-c276-4fc8-924b-40a0ea21d284")
+      (extension "addon/vimium-ff" "d7742d87-e61d-4b78-b8a1-b469842139fa")
+      (extension "1password-x-password-manager" "d634138d-c276-4fc8-924b-40a0ea21d284")
       (extension "darkreader" "addon@darkreader.org")
       # ...
     ];
   in {
-    environment.systemPackages = [
+    home.packages = [
       (
         pkgs.wrapFirefox
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
@@ -33,6 +39,7 @@
             lib.mapAttrsToList (
               name: value: ''lockPref(${lib.strings.toJSON name}, ${lib.strings.toJSON value});''
             )
+            prefs
           );
 
           extraPolicies = {
