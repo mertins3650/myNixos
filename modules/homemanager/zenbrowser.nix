@@ -1,6 +1,5 @@
 {inputs, ...}: {
   flake.homeModules.zen = {
-    config,
     pkgs,
     lib,
     ...
@@ -22,6 +21,7 @@
       (extension "ublock-origin" "uBlock0@raymondhill.net")
     ];
 
+    # This is your wrapped version with all plugins and policies
     zenBrowser =
       pkgs.wrapFirefox
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
@@ -70,18 +70,18 @@
         };
       };
   in {
-    # Expose your customized package to the rest of Home Manager
-    options.custom.zen.package = lib.mkOption {
-      type = lib.types.package;
-      default = zenBrowser;
-      description = "My customized wrapped Zen Browser";
-    };
-
-    # Install the exposed package
-    config = {
-      home.packages = [
-        config.custom.zen.package
-      ];
-    };
+    home.packages = [
+      zenBrowser
+      (pkgs.writeShellApplication {
+        name = "launch-webapp";
+        runtimeInputs = with pkgs; [
+          util-linux
+          uwsm
+        ];
+        text = ''
+          exec setsid uwsm app -- ${lib.getExe zenBrowser} "$1" "''${@:2}"
+        '';
+      })
+    ];
   };
 }
