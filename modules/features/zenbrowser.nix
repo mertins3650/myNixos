@@ -1,5 +1,5 @@
 {...}: {
-  flake.homeModules.zenbrowser = {
+  flake.nixosModules.zenbrowser = {
     pkgs,
     inputs,
     lib,
@@ -30,7 +30,7 @@
       # ...
     ];
   in {
-    home.packages = [
+    environment.systemPackages = [
       (
         pkgs.wrapFirefox
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped

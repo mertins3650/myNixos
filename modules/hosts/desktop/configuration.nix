@@ -7,6 +7,7 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules.base
+      self.nixosModules.zenbrowser
       self.nixosModules.desktopHardware
       self.nixosModules.desktopenv
       self.nixosModules.development
@@ -17,7 +18,6 @@
     ];
 
     home-manager.users.simonm.imports = [
-      self.homeModules.zenbrowser
       self.homeModules.chromium
       self.homeModules.fcitx5
       self.homeModules.fontconfig
