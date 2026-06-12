@@ -39,7 +39,7 @@
 #   };
 # }
 {...}: {
-  flake.homeModules.scripts = {
+  flake.homeModules.launch-browser = {
     config,
     pkgs,
     ...
@@ -53,7 +53,7 @@
         ];
 
         text = ''
-          browser="${pkgs.zen-browser}/bin/zen"
+          browser="${config.custom.zen.package}/bin/zen"
 
           if [[ "$browser" =~ (firefox|zen|librewolf|mullvad) ]]; then
               private_flag="--private-window"

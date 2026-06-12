@@ -1,5 +1,6 @@
 {inputs, ...}: {
   flake.homeModules.zen = {
+    config,
     pkgs,
     lib,
     ...
@@ -36,13 +37,9 @@
 
         extraPolicies = {
           DisableTelemetry = true;
-
-          ExtensionSettings =
-            builtins.listToAttrs extensions;
-
+          ExtensionSettings = builtins.listToAttrs extensions;
           SearchEngines = {
             Default = "ddg";
-
             Add = [
               {
                 Name = "nixpkgs packages";
@@ -73,8 +70,18 @@
         };
       };
   in {
-    home.packages = [
-      zenBrowser
-    ];
+    # Expose your customized package to the rest of Home Manager
+    options.custom.zen.package = lib.mkOption {
+      type = lib.types.package;
+      default = zenBrowser;
+      description = "My customized wrapped Zen Browser";
+    };
+
+    # Install the exposed package
+    config = {
+      home.packages = [
+        config.custom.zen.package
+      ];
+    };
   };
 }

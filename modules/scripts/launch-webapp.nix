@@ -21,9 +21,12 @@
 #   };
 # }
 {...}: {
-  flake.homeModules.scripts = {pkgs, ...}: let
-    # Assuming 'zen-browser' is available in your pkgs via a flake input or overlay
-    zenCmd = "${pkgs.zen-browser}/bin/zen";
+  flake.homeModules.launch-webapp = {
+    config,
+    pkgs,
+    ...
+  }: let
+    zenCmd = "${config.custom.zen.package}/bin/zen";
   in {
     home.packages = [
       (pkgs.writeShellApplication {
@@ -33,7 +36,6 @@
           uwsm
         ];
         text = ''
-          # Zen does not support Chromium's --app flag, so we pass the URL directly.
           exec setsid uwsm app -- ${zenCmd} "$1" "''${@:2}"
         '';
       })
