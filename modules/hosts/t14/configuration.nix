@@ -16,6 +16,7 @@
     ];
 
     home-manager.users.simonm.imports = [
+      self.homeModules.zen
       self.homeModules.hyprland
       self.homeModules.hypridle
       self.homeModules.fcitx5
@@ -36,7 +37,7 @@
       self.homeModules.git
       self.homeModules.homepackages
     ];
-  boot.initrd.luks.devices."luks-36de1782-d627-41c9-8c32-902f06423faa".device = "/dev/disk/by-uuid/36de1782-d627-41c9-8c32-902f06423faa";
+    boot.initrd.luks.devices."luks-36de1782-d627-41c9-8c32-902f06423faa".device = "/dev/disk/by-uuid/36de1782-d627-41c9-8c32-902f06423faa";
 
     services.thermald.enable = true;
     boot.initrd.kernelModules = ["i915"];

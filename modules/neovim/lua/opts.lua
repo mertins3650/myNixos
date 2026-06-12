@@ -1,7 +1,5 @@
 vim.opt.guicursor = ""
 vim.opt.cursorline = true
--- vim.opt.cursorlineopt = "number"
--- vim.g.have_nerd_font = false
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.colorcolumn = "80"
