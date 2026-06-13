@@ -16,10 +16,14 @@
       "extensions.autoDisableScopes" = 0;
       "extensions.pocket.enabled" = false;
       "browser.startup.page" = 1;
+      "browser.tabs.loadInBackground" = false;
     };
 
     extensions = [
       (extension "ublock-origin" "uBlock0@raymondhill.net")
+      (extension "1password-x-password-manager" "{d634138d-c276-4fc8-924b-40a0ea21d284}")
+      (extension "vimium-ff" "{d7742d87-e61d-4b78-b8a1-b469842139fa}")
+      (extension "darkreader" "addon@darkreader.org")
     ];
 
     zenBrowser =
@@ -76,7 +80,6 @@
         name = "launch-webapp";
         runtimeInputs = with pkgs; [util-linux];
         text = ''
-
           exec setsid uwsm app -- ${lib.getExe zenBrowser} "$1" "''${@:2}"
         '';
       })
