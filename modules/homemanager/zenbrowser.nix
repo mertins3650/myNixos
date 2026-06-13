@@ -80,7 +80,7 @@
         name = "launch-webapp";
         runtimeInputs = with pkgs; [util-linux];
         text = ''
-                    profile="$HOME/.local/share/zen-webapps/$(basename "$1")"
+          profile="$HOME/.local/share/zen-webapps/$(basename "$1")"
           mkdir -p "$profile"
 
           exec setsid uwsm app -- ${lib.getExe zenBrowser} \
