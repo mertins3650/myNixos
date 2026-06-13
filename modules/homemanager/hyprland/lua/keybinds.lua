@@ -47,8 +47,8 @@ local binds = {
 	{ "SUPER + D", app("rofi -show drun") },
 	{ "SUPER + CTRL + F", app("nautilus --new-window") },
 	{ "SUPER + SHIFT + F", app("ghostty -e yazi") },
-	{ "SUPER + SHIFT + B", app("launch-browser") },
-	{ "SUPER + SHIFT + ALT + B", app("launch-browser --private") },
+	{ "SUPER + SHIFT + B", app("zen") },
+	{ "SUPER + SHIFT + ALT + B", app("zen --private-window") },
 
 	-- webapps
 	{ "SUPER + SHIFT + A", wep_app("https://chat.deepseek.com/") },

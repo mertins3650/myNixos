@@ -13,11 +13,7 @@ autocmd({ "BufWritePre" }, {
 autocmd("BufEnter", {
 	group = MertinsGroup,
 	callback = function()
-		if vim.bo.filetype == "zig" then
-			pcall(vim.cmd.colorscheme, "tokyonight-night")
-		else
-			pcall(vim.cmd.colorscheme, "rose-pine-moon")
-		end
+		pcall(vim.cmd.colorscheme, "rose-pine-moon")
 	end,
 })
 
