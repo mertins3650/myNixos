@@ -17,6 +17,7 @@
 
     home-manager.users.simonm.imports = [
       self.homeModules.zen
+      self.homeModules.defaultapps
       self.homeModules.hyprland
       self.homeModules.hypridle
       self.homeModules.fcitx5

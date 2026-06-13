@@ -15,13 +15,13 @@
     prefs = {
       "extensions.autoDisableScopes" = 0;
       "extensions.pocket.enabled" = false;
+      "browser.startup.page" = 1;
     };
 
     extensions = [
       (extension "ublock-origin" "uBlock0@raymondhill.net")
     ];
 
-    # This is your wrapped version with all plugins and policies
     zenBrowser =
       pkgs.wrapFirefox
       inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
@@ -74,11 +74,9 @@
       zenBrowser
       (pkgs.writeShellApplication {
         name = "launch-webapp";
-        runtimeInputs = with pkgs; [
-          util-linux
-          uwsm
-        ];
+        runtimeInputs = with pkgs; [util-linux];
         text = ''
+
           exec setsid uwsm app -- ${lib.getExe zenBrowser} "$1" "''${@:2}"
         '';
       })
