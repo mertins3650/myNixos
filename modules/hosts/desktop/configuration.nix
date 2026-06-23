@@ -17,6 +17,8 @@
     ];
 
     home-manager.users.simonm.imports = [
+      self.homeModules.zen
+      self.homeModules.defaultapps
       self.homeModules.chromium
       self.homeModules.fcitx5
       self.homeModules.fontconfig
