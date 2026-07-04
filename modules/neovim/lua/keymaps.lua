@@ -15,6 +15,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without replace" })
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>love", "<cmd>!love .<CR>", { silent = true })
 vim.keymap.set("n", "<leader>scf", ":source %<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
