@@ -17,7 +17,7 @@
       extraGroups = ["networkmanager" "wheel" "docker"];
       shell = pkgs.zsh;
     };
-
+    home.pointerCursor.enable = true;
     programs.zsh.enable = true;
 
     home-manager.users.simonm.imports = [
