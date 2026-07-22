@@ -1,4 +1,3 @@
-local hostname = io.popen("hostname"):read("*l")
 hl.monitor({
 	output = "",
 	mode = "preferred",
@@ -14,8 +13,15 @@ hl.monitor({
 })
 
 hl.monitor({
+	output = "DP-1",
+	mode = "2560x1440@200",
+	position = "0x0",
+	scale = 1,
+})
+
+hl.monitor({
 	output = "eDP-1",
-	mode = hostname == "t14" and "2560x1440@200" or "preferred",
+	mode = "preferred",
 	position = "auto",
-	scale = 1.25,
+	scale = 1,
 })

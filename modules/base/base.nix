@@ -4,7 +4,8 @@
       wireless.iwd.enable = true;
       firewall.enable = true;
     };
-services.fwupd.enable = true;
+    networking.dhcpcd.wait = "background";
+    services.fwupd.enable = true;
     nix.optimise.automatic = true;
     nix.settings.experimental-features = ["nix-command" "flakes"];
     programs.dconf.enable = true;
